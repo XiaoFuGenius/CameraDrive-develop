@@ -2,8 +2,8 @@
 //  CTEasyUpgrade.h
 //  CameraDrive
 //
-//  Created by 胡文峰 on 2018/12/15.
-//  Copyright © 2018 郑炜钢. All rights reserved.
+//  Created by 胡文峰 on 2018/12/18.
+//  Copyright © 2018 XIAOFUTECH. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>

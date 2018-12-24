@@ -2,8 +2,8 @@
 //  CTEasyLinker.h
 //  CameraDrive
 //
-//  Created by 胡文峰 on 2018/12/15.
-//  Copyright © 2018 郑炜钢. All rights reserved.
+//  Created by 胡文峰 on 2018/12/18.
+//  Copyright © 2018 XIAOFUTECH. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -85,16 +85,20 @@ typedef void(^CTNetworkStatusHandler)(CTBleResponseCode code, int type, NSString
  */
 @property (nonatomic, copy) void(^networkLinkResponse)(CTBleResponseCode code, int type, NSString *ip);
 
-
-/**较”CTBleHelper“，无区别；
- 已连接 目标设备 的相关信息
- @return 设备信息对象实例
- 注[Key]：Name，BindID，
- BleVersionString，CoreVersionString，BleVersion，CoreVersion，
- MAC，
- IsCharge，Battery，
+/** 可选
+ 5G网络检测，启动和结束回调
  */
-+ (NSDictionary *)DeviceInfoCache;
+@property (nonatomic, copy) void(^verify5GResponse)(BOOL isStart, CTBleResponseCode code);
+
+/** 可选
+ Ping检测，启动和结束回调
+ */
+@property (nonatomic, copy) void(^staPingResponse)(BOOL isStart, CTBleResponseCode code);
+
+/** 可选
+ Hotspot，启动和结束回调
+ */
+@property (nonatomic, copy) void(^hotspotResponse)(BOOL isStart, CTBleResponseCode code);
 
 /** 较”CTBleHelper“，连接后会自动获取版本号，若失败，则断开蓝牙连接，返回失败；
  与 目标设备 的蓝牙建立连接
@@ -108,10 +112,10 @@ typedef void(^CTNetworkStatusHandler)(CTBleResponseCode code, int type, NSString
 /** 较“CTBleHelper”，”checkOnly=NO“表示，查询成功后会自动开启联网进程；
  获取 设备 当前的 网络连通 状态
  @param checkOnly 是否仅查询状态
- @param response response 请求回调
+ @param response response 请求回调，仅”checkOnly=YES“才会调用
  注：type -2：请求失败，-1：未知类型码，0：联网状态待定，1：STA，2：AP
  */
-+ (void)NetworkStatusCheckOnly:(BOOL)checkOnly Response:(CTNetworkStatusHandler)response;
++ (void)NetworkStatusCheckOnly:(BOOL)checkOnly Response:(nullable CTNetworkStatusHandler)response;
 
 /**
  请求 设备 启动热点模式

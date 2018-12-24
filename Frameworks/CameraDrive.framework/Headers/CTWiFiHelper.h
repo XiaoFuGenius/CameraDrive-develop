@@ -1,9 +1,9 @@
 //
 //  CTWiFiHelper.h
-//  CameraTool
+//  CameraDrive
 //
-//  Created by xiaofutech on 2016/12/30.
-//  Copyright © 2016年 xiaofutech. All rights reserved.
+//  Created by 胡文峰 on 2018/12/18.
+//  Copyright © 2018 XIAOFUTECH. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
