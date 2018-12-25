@@ -143,10 +143,12 @@ strip_invalid_archs() {
 
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
+  install_framework "${PODS_ROOT}/CameraDrive-develop/Frameworks/CameraDrive.framework"
   install_framework "${PODS_ROOT}/XiaoFuTech-develop/Frameworks/XiaoFuTech.framework"
   install_framework "${PODS_ROOT}/XiaoFuTech-develop/Frameworks/XiaoFuTech.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
+  install_framework "${PODS_ROOT}/CameraDrive-develop/Frameworks/CameraDrive.framework"
   install_framework "${PODS_ROOT}/XiaoFuTech-develop/Frameworks/XiaoFuTech.framework"
   install_framework "${PODS_ROOT}/XiaoFuTech-develop/Frameworks/XiaoFuTech.framework"
 fi

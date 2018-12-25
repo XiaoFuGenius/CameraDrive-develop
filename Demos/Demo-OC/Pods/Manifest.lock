@@ -14,24 +14,28 @@ PODS:
   - AFNetworking/Serialization (3.2.1)
   - AFNetworking/UIKit (3.2.1):
     - AFNetworking/NSURLSession
+  - CameraDrive-develop (1.0.6)
   - XiaoFuTech-develop (1.0.5):
     - XiaoFuTech-develop/AFNetworking (= 1.0.5)
   - XiaoFuTech-develop/AFNetworking (1.0.5):
     - AFNetworking (~> 3.0)
 
 DEPENDENCIES:
+  - CameraDrive-develop
   - XiaoFuTech-develop
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - AFNetworking
   https://github.com/XiaoFuGenius/xiaofu-specs.git:
+    - CameraDrive-develop
     - XiaoFuTech-develop
 
 SPEC CHECKSUMS:
   AFNetworking: b6f891fdfaed196b46c7a83cf209e09697b94057
+  CameraDrive-develop: 8e61c4b1fe169c2ae9120cb1bdd962d339c2208d
   XiaoFuTech-develop: 92fbffc5ee659318eef63d52a56841394b673a5f
 
-PODFILE CHECKSUM: 5b62b065e9c06791088faf9d9df0eebd98fc3bbb
+PODFILE CHECKSUM: 6ba94b4b6e661c7da4ae79a90ac0d30bdbb4e710
 
 COCOAPODS: 1.5.3

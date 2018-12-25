@@ -1,0 +1,1 @@
+../../../../CameraDrive-develop/Frameworks/CameraDrive.framework/Headers/CTHotspotHelper.h

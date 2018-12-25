@@ -257,10 +257,12 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Demo-OC/Pods-Demo-OC-frameworks.sh",
+				"${PODS_ROOT}/CameraDrive-develop/Frameworks/CameraDrive.framework",
 				"${PODS_ROOT}/XiaoFuTech-develop/Frameworks/XiaoFuTech.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CameraDrive.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/XiaoFuTech.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
