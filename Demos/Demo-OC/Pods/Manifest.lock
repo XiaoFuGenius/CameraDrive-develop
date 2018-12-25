@@ -1,0 +1,37 @@
+PODS:
+  - AFNetworking (3.2.1):
+    - AFNetworking/NSURLSession (= 3.2.1)
+    - AFNetworking/Reachability (= 3.2.1)
+    - AFNetworking/Security (= 3.2.1)
+    - AFNetworking/Serialization (= 3.2.1)
+    - AFNetworking/UIKit (= 3.2.1)
+  - AFNetworking/NSURLSession (3.2.1):
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+  - AFNetworking/Reachability (3.2.1)
+  - AFNetworking/Security (3.2.1)
+  - AFNetworking/Serialization (3.2.1)
+  - AFNetworking/UIKit (3.2.1):
+    - AFNetworking/NSURLSession
+  - XiaoFuTech-develop (1.0.5):
+    - XiaoFuTech-develop/AFNetworking (= 1.0.5)
+  - XiaoFuTech-develop/AFNetworking (1.0.5):
+    - AFNetworking (~> 3.0)
+
+DEPENDENCIES:
+  - XiaoFuTech-develop
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - AFNetworking
+  https://github.com/XiaoFuGenius/xiaofu-specs.git:
+    - XiaoFuTech-develop
+
+SPEC CHECKSUMS:
+  AFNetworking: b6f891fdfaed196b46c7a83cf209e09697b94057
+  XiaoFuTech-develop: 92fbffc5ee659318eef63d52a56841394b673a5f
+
+PODFILE CHECKSUM: 5b62b065e9c06791088faf9d9df0eebd98fc3bbb
+
+COCOAPODS: 1.5.3

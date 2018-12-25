@@ -1,0 +1,21 @@
+//
+//  XFPrefixHeader.pch
+//  Demo-OC
+//
+//  Created by 胡文峰 on 2018/12/18.
+//  Copyright © 2018 XIAOFUTECH. All rights reserved.
+//
+
+#ifndef XFPrefixHeader_pch
+#define XFPrefixHeader_pch
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+
+#import <CameraDrive/CameraDrive.h>
+#import <XiaoFuTech/XiaoFuTech.h>
+
+#import "XFAppDelegate.h"
+#import "XFConfig.h"
+
+#endif /* XFPrefixHeader_pch */

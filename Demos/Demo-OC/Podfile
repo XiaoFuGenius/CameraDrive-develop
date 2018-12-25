@@ -1,0 +1,20 @@
+# Uncomment the next line to define a global platform for your project
+
+    #source 'https://github.com/artsy/Specs.git'
+    source 'https://github.com/CocoaPods/Specs.git'
+    source 'https://github.com/XiaoFuGenius/xiaofu-specs.git'
+
+  platform :ios, '8.0'
+  target 'Demo-OC' do
+
+    # Pods for Demo-OC
+    # pod install --verbose --no-repo-update
+    # pod update --verbose --no-repo-update
+
+    #pod 'CameraDrive-release'
+    #pod 'XiaoFuTech-release'
+
+    pod 'CameraDrive-develop'
+    pod 'XiaoFuTech-develop'
+
+end

@@ -1,0 +1,1 @@
+../../../../XiaoFuTech-develop/Frameworks/XiaoFuTech.framework/Headers/NSObject+XFCategory.h
