@@ -14,6 +14,11 @@
 
 @implementation XFDemoViewController
 
+- (void)dealloc
+{
+    NSLog(@"【dealloc】%@", self);
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -67,6 +72,12 @@
     UIButton *easyLinker = [self setupButtonTitle:@"CTEasyLinker\n（推荐）"
                                              Action:@selector(showEasyLinker) Frame:frame];
     [self.view addSubview:easyLinker];
+
+    frame = CGRectMake([cameraDrive xf_GetRight] + width/3,
+                       [cameraDrive xf_GetBottom] + width/3, width, height);
+    UIButton *swiftLinker = [self setupButtonTitle:@"CTSwiftLinker\n（推荐+）"
+                                           Action:@selector(showSwiftLinker) Frame:frame];
+    [self.view addSubview:swiftLinker];
 }
 
 - (void)openApplicationSettings:(UIButton *)sender
@@ -106,6 +117,12 @@
 - (void)showEasyLinker
 {
     UIViewController *ctr = [NSClassFromString(@"EasyLinkerViewController") new];
+    [self.navigationController pushViewController:ctr animated:YES];
+}
+
+- (void)showSwiftLinker
+{
+    UIViewController *ctr = [NSClassFromString(@"SwiftLinkerViewController") new];
     [self.navigationController pushViewController:ctr animated:YES];
 }
 

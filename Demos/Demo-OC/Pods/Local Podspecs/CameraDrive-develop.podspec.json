@@ -1,0 +1,25 @@
+{
+  "name": "CameraDrive-develop",
+  "version": "1.0.7",
+  "license": "MIT",
+  "summary": "iOS 快捷开发工具包 CameraDrive.framework Develop.",
+  "deprecated": false,
+  "homepage": "https://github.com/XiaoFuGenius/CameraDrive-develop",
+  "source": {
+    "git": "",
+    "tag": "1.0.7"
+  },
+  "requires_arc": true,
+  "platforms": {
+    "ios": "8.0"
+  },
+  "vendored_frameworks": "Frameworks/CameraDrive.framework",
+  "frameworks": [
+    "UIKit",
+    "Foundation"
+  ],
+  "authors": {
+    "XIAOFU": "https://github.com/XiaoFuGenius"
+  },
+  "social_media_url": "https://github.com/XiaoFuGenius"
+}

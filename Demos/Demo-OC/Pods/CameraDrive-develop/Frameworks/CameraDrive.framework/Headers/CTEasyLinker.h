@@ -47,7 +47,7 @@ typedef void(^CTNetworkStatusHandler)(CTBleResponseCode code, int type, NSString
 /**
  STA 模式下会忽略的 ssid 字符串数组
  全匹配 ssid 开头字符串，匹配成功，判定为测试仪热点，不做为STA模式可用wifi处理
- 注：默认过滤 ”CFY_“ 开头的ssid
+ 注：默认过滤 ”CFY_“ 开头的ssid，可以设置 nil 来关闭过滤；
  */
 @property (nonatomic, strong) NSArray<NSString *> *ssidIgnored;
 
@@ -71,11 +71,15 @@ typedef void(^CTNetworkStatusHandler)(CTBleResponseCode code, int type, NSString
 @property (nonatomic, copy) void(^preparedForSTA)(NSString *ssid);
 
 /**
- STA 联网模式，完成回调；
+ AP 联网模式，失败回调；
+ */
+@property (nonatomic, copy) void(^responseForAP)(CTBleResponseCode code);
+
+/** 较”CTBleHelper“，wifiStatus -101：5g检查，判定为5g网络，-102：ping检查，判定为公共验证类wifi；
+ STA 联网模式，失败回调；
  注：方法“NetworkStatusCheckOnly:Response”会触发该回调，含“5G网络”检测；
  注：方法“STA:Password”会触发该回调，含”Ping“检测；
- 注：wifiStatus -3：未搜索到ssid（设备固件版本可能过旧），-2：命令请求失败或超时，-1：密码错误，0：请求成功；
- 注：较”CTBleHelper“，wifiStatus -101：5g检查，判定为5g网络，-102：ping检查，判定为公共验证类wifi；
+ 注：wifiStatus -3：未搜索到ssid（设备固件版本可能过旧），-2：命令请求失败或超时，-1：密码错误
  */
 @property (nonatomic, copy) void(^responseForSTA)(CTBleResponseCode code, int wifiStatus, NSString *ip);
 
@@ -84,6 +88,11 @@ typedef void(^CTNetworkStatusHandler)(CTBleResponseCode code, int type, NSString
  注：方法“NetworkStatusCheckOnly:Response”会触发该回调；
  */
 @property (nonatomic, copy) void(^networkLinkResponse)(CTBleResponseCode code, int type, NSString *ip);
+
+/** 可选
+ STA，启动回调
+ */
+@property (nonatomic, copy) void(^staStartResponse)(void);
 
 /** 可选
  5G网络检测，启动和结束回调
@@ -96,9 +105,19 @@ typedef void(^CTNetworkStatusHandler)(CTBleResponseCode code, int type, NSString
 @property (nonatomic, copy) void(^staPingResponse)(BOOL isStart, CTBleResponseCode code);
 
 /** 可选
+ AP，启动回调
+ */
+@property (nonatomic, copy) void(^apStartResponse)(void);
+
+/** 可选
  Hotspot，启动和结束回调
  */
 @property (nonatomic, copy) void(^hotspotResponse)(BOOL isStart, CTBleResponseCode code);
+
+/** 可选
+ AP模式，热点连接成功后的IP地址检测，启动和结束回调
+ */
+@property (nonatomic, copy) void(^verifyIpAddressResponse)(BOOL isStart, CTBleResponseCode code);
 
 /** 较”CTBleHelper“，连接后会自动获取版本号，若失败，则断开蓝牙连接，返回失败；
  与 目标设备 的蓝牙建立连接

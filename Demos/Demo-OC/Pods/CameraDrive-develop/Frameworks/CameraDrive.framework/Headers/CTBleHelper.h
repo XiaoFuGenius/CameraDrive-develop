@@ -45,10 +45,11 @@ typedef void(^CTResponseHandler)(CTBleResponseCode code, NSString * _Nullable ms
 /**
  手机蓝牙的启停状态
  @return 当前蓝牙状态
- 注1：初次安装应用，首次打开应用，需要调用该方法来请求用户给予蓝牙使用权限；
- 注2：应在合适的时机先行调用一次(首次调用获取的状态不可信，是默认值)，以激活内部对于手机蓝牙状态的监控；
+ 注1：初次安装应用，首次调用该方法会激活应用向用户请求蓝牙权限
+ 注2：该方法必须为Sdk中最先调用的方法，重要！
+ 注3：默认值 -1，用户未授权或Sdk内部蓝牙模块未初始化；0 手机蓝牙未开启，1 手机蓝牙已开启；
  */
-+ (BOOL)BlePowerdOn;
++ (int)BlePowerdOn;
 
 #pragma mark >>> 设备缓存数据 <<<
 /**
@@ -92,7 +93,7 @@ typedef void(^CTResponseHandler)(CTBleResponseCode code, NSString * _Nullable ms
 /**
  与 目标设备 的蓝牙连接状态
  @return 状态  -2：连接已断开，-1：连接失败，0：未连接，1：连接中，2：已连接
- 注：-1：不会有回调；
+ 注：状态 1：不会有回调；
  */
 + (int)ConnectStatus;
 

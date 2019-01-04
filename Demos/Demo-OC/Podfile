@@ -12,11 +12,12 @@
     # pod update --verbose --no-repo-update
 
 #    开发阶段，支持模拟器调试UI
-    #pod 'CameraDrive-release'
-    #pod 'XiaoFuTech-release'
-
-#    发布阶段，不支持模拟器调试UI
     pod 'CameraDrive-develop'
     pod 'XiaoFuTech-develop'
+
+
+#    发布阶段，不支持模拟器调试UI
+    #pod 'CameraDrive-release'
+    #pod 'XiaoFuTech-release'
 
 end

@@ -45,16 +45,18 @@
 ### Beta.Part2 ~蓝牙&联网 连接控制
 ##### ```CTBleHelper.h```基础
 ##### ```CTEasyLinker.h```推荐
-##### ```CTEasyUpgrade.h```推荐
+##### ```CTSwiftLinker.h```推荐+
 
 ### Gamma.Part3 ~摄像头 控制
 ##### ```CTCameraHelper.h```
+##### ```CTEasyCamera.h```推荐
 
 ### Delta.Part4.示例代码
 ###### 示例代码见```Demo```中的相关```api```调用；
-###### 更多详情或疑问，请联系``Sdk``提供人员；
+###### 建议尽量参考```Demo```中的```api```调用方式和逻辑；
+###### 更多详情或疑问，请联系我们的``Sdk``支持同事；
 
 
 ## <小肤检测详情接口>
 > a.文档见```Demo```中的```小肤检测外部接口.doc```文件；
-> b.示例代码，可见```XFCameraViewController.m```文件中的```apiTest```部分代码；
+> b.示例代码，可见```CameraHelperViewController.m```或```EasyCameraViewController```文件中的```apiTest```部分代码；

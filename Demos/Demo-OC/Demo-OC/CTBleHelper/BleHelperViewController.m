@@ -7,7 +7,7 @@
 //
 
 #import "BleHelperViewController.h"
-#import "XFCameraViewController.h"
+#import "CameraHelperViewController.h"
 
 #define BleLog(message, ...) NSLog((@"%s ~> " message), __PRETTY_FUNCTION__, ##__VA_ARGS__);
 
@@ -26,6 +26,7 @@
 @property (nonatomic, strong) UIButton *shutdown;
 @property (nonatomic, strong) UIView *maskView;
 
+@property (nonatomic, assign) BOOL bleActived;
 @property (nonatomic, assign) BOOL isAutoBind;  // 搜索完成后，是否自动连接设备蓝牙
 
 @property (nonatomic, strong) NSMutableString *log;
@@ -63,6 +64,11 @@
 
 @implementation BleHelperViewController
 
+- (void)dealloc
+{
+    NSLog(@"【dealloc】%@", self);
+}
+
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
 
@@ -73,7 +79,8 @@
     [super viewDidDisappear:animated];
 
     [NSObject cancelPreviousPerformRequestsWithTarget:self];
-    if ([CTBleHelper ConnectStatus]==2 && self.shouldReset) {
+    if (self.shouldReset) {
+        [CTBleHelper StopScan];
         [CTBleHelper Disconnect];
         [CTBleHelper CleanDeviceCache];
     }
@@ -87,8 +94,7 @@
     self.view.backgroundColor = XFColor(0xf6f6f6, 1.0f);
 
     [self customUI];
-    [CTBleHelper BlePowerdOn];
-    [self performSelector:@selector(everythingIsReady) withObject:nil afterDelay:1.0f];
+    [self everythingIsReady];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -111,27 +117,38 @@
 
 - (void)everythingIsReady
 {
-    self.isAutoBind = YES;
-    self.autoByRSSI = YES;
+    NSNotificationCenter *notiCenter = [NSNotificationCenter defaultCenter];
+    [notiCenter removeObserver:self name:CT_iPhone_BleUpdate object:nil];
+    [notiCenter addObserver:self selector:@selector(CT_iPhone_BleUpdate:)
+                       name:CT_iPhone_BleUpdate object:nil];
 
-    [self configCameraDrive];
+    if ([CTBleHelper BlePowerdOn]==-1) {
+        [self xf_Log:@"等待< 用户给予蓝牙权限 >或< Sdk内部启动蓝牙模块 >."];
+        self.bleActived = NO;
+        return;
+    }
+    self.bleActived = YES;
 
     self.startScan.userInteractionEnabled = YES;
     self.startScan.selected = YES;
-    self.log = [NSMutableString string];
     [self xf_Log:@"准备就绪..."];
 
-    if ([CTBleHelper BlePowerdOn]) {
-        [self xf_Log:@"手机蓝牙已打开."];
-    } else {
-        [self xf_Log:@"手机蓝牙已关闭."];
-    }
+    self.isAutoBind = YES;
+    self.autoByRSSI = YES;
+
+    [self configXiaoFuSdk];
 
     self.versionCheckDisabled = YES;
     [self versionCheckDisabledSwitch:nil];
+
+    if (![CTBleHelper BlePowerdOn]) {
+        [self xf_Log:@"手机蓝牙已关闭."];
+        return;
+    }
+    [self xf_Log:@"手机蓝牙已打开."];
 }
 
-- (void)configCameraDrive
+- (void)configXiaoFuSdk
 {
     XFWeakSelf(weakSelf);
     NSNotificationCenter *notiCenter = [NSNotificationCenter defaultCenter];
@@ -142,8 +159,7 @@
         [weakSelf xf_Log:log];
     };
     [CTConfig SharedConfig].splitStrings = @[@"!@"];
-    [notiCenter addObserver:self selector:@selector(CT_iPhone_BleUpdate:)
-                       name:CT_iPhone_BleUpdate object:nil];
+
     [notiCenter addObserver:self selector:@selector(CT_Device_ScanUpdate:)
                        name:CT_Device_ScanUpdate object:nil];
     [notiCenter addObserver:self selector:@selector(CT_Device_BleUpdate:)
@@ -204,10 +220,19 @@
 {
     XFWeakSelf(weakSelf);
     dispatch_async(dispatch_get_main_queue(), ^{
-        if ([CTBleHelper BlePowerdOn]) {
-            [weakSelf xf_Log:@"手机蓝牙已打开."];
-        } else {
-            [weakSelf xf_Log:@"手机蓝牙已关闭."];
+        @synchronized (weakSelf) {
+            if (weakSelf.bleActived) {
+                if (![CTBleHelper BlePowerdOn]) {
+                    [weakSelf xf_Log:@"手机蓝牙已关闭."];
+                } else {
+                    [weakSelf xf_Log:@"手机蓝牙已打开."];
+                }
+                return;
+            }
+
+            // 用户已授权 & Sdk内部蓝牙模块已启动.
+            weakSelf.bleActived = YES;
+            [weakSelf everythingIsReady];
         }
     });
 }
@@ -478,7 +503,7 @@
         weakSelf.apLinkCheck = YES;
         NSNotificationCenter *notiCenter = [NSNotificationCenter defaultCenter];
         [notiCenter removeObserver:weakSelf name:UIApplicationWillEnterForegroundNotification object:nil];
-        [notiCenter addObserver:self selector:@selector(applicationWillEnterForeground)
+        [notiCenter addObserver:weakSelf selector:@selector(applicationWillEnterForeground)
                            name:UIApplicationWillEnterForegroundNotification object:nil];
     }]];
     [self showAlert:apAlert Sender:self.autoLink];
@@ -692,7 +717,7 @@
 {
     XFWeakSelf(weakSelf);
     [CTBleHelper AP:^(CTBleResponseCode code, NSString *ssid, NSString *password) {
-        if (code==CTBleResponseOK) {
+        if (code==CTBleResponseOK && [ssid xf_NotNull]) {
             [weakSelf cmd_AP_launch:ssid password:password];
         } else {
             if (weakSelf.networkLinkResponse) {
@@ -1231,7 +1256,7 @@
     [self xf_Log:[NSString stringWithFormat:@"开始启动摄像头[ip：%@]...", self.ip]];
 
     XFWeakSelf(weakSelf);
-    XFCameraViewController *cameraCtr = [[XFCameraViewController alloc] init];
+    CameraHelperViewController *cameraCtr = [[CameraHelperViewController alloc] init];
     cameraCtr.param = @{@"IP":[self.ip copy]};
     cameraCtr.logHandler = ^(NSString *log) {
         [weakSelf xf_Log:log];
@@ -1985,6 +2010,15 @@
 }
 
 #pragma mark >> Log <<
+
+- (NSMutableString *)log
+{
+    if (!_log) {
+        _log = [NSMutableString string];
+    }
+    return _log;
+}
+
 - (void)xf_Log:(NSString *)logX
 {
     dispatch_async(dispatch_get_main_queue(), ^{

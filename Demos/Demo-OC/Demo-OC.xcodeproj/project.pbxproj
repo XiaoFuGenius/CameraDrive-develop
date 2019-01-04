@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6A85778B21DDC0810087FCF4 /* SwiftLinkerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A85778A21DDC0810087FCF4 /* SwiftLinkerViewController.m */; };
+		6A85778E21DDC0970087FCF4 /* EasyCameraViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A85778D21DDC0970087FCF4 /* EasyCameraViewController.m */; };
 		6AA400D421C8A3D00023BCEB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6AA400D321C8A3D00023BCEB /* Assets.xcassets */; };
 		6AA400DA21C8A3D00023BCEB /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AA400D921C8A3D00023BCEB /* main.m */; };
 		6AA400E221C8A58F0023BCEB /* NetworkExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6AA400E121C8A58F0023BCEB /* NetworkExtension.framework */; };
@@ -18,7 +20,7 @@
 		6AA4011121C8C5010023BCEB /* Core_3.1.0_30100.bin in Resources */ = {isa = PBXBuildFile; fileRef = 6AA4010D21C8C5000023BCEB /* Core_3.1.0_30100.bin */; };
 		6AA4011221C8C5010023BCEB /* Core_3.0.0_30000.bin in Resources */ = {isa = PBXBuildFile; fileRef = 6AA4010E21C8C5010023BCEB /* Core_3.0.0_30000.bin */; };
 		6AA4011421C8D5050023BCEB /* EasyLinkerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AA4010521C8BF600023BCEB /* EasyLinkerViewController.m */; };
-		6AA4012421CA304E0023BCEB /* XFCameraViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AA4010821C8BF720023BCEB /* XFCameraViewController.m */; };
+		6AA4012421CA304E0023BCEB /* CameraHelperViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AA4010821C8BF720023BCEB /* CameraHelperViewController.m */; };
 		6ADE0B6621CE2D6300E5F633 /* BleHelperViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6ADE0B6521CE2D6300E5F633 /* BleHelperViewController.m */; };
 		6ADE0B7721D0C5A300E5F633 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6ADE0B7921D0C5A300E5F633 /* InfoPlist.strings */; };
 		CD0F5D6ED3E6FB18D8E6866C /* libPods-Demo-OC.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D9AB70DBA39ABA87423B6D07 /* libPods-Demo-OC.a */; };
@@ -38,6 +40,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		6A85778921DDC0810087FCF4 /* SwiftLinkerViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SwiftLinkerViewController.h; sourceTree = "<group>"; };
+		6A85778A21DDC0810087FCF4 /* SwiftLinkerViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SwiftLinkerViewController.m; sourceTree = "<group>"; };
+		6A85778C21DDC0970087FCF4 /* EasyCameraViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EasyCameraViewController.h; sourceTree = "<group>"; };
+		6A85778D21DDC0970087FCF4 /* EasyCameraViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EasyCameraViewController.m; sourceTree = "<group>"; };
 		6AA400C721C8A3D00023BCEB /* Demo-OC.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Demo-OC.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6AA400D321C8A3D00023BCEB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6AA400D821C8A3D00023BCEB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -53,8 +59,8 @@
 		6AA400FB21C8A9C30023BCEB /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		6AA4010421C8BF600023BCEB /* EasyLinkerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EasyLinkerViewController.h; sourceTree = "<group>"; };
 		6AA4010521C8BF600023BCEB /* EasyLinkerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EasyLinkerViewController.m; sourceTree = "<group>"; };
-		6AA4010721C8BF710023BCEB /* XFCameraViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XFCameraViewController.h; sourceTree = "<group>"; };
-		6AA4010821C8BF720023BCEB /* XFCameraViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XFCameraViewController.m; sourceTree = "<group>"; };
+		6AA4010721C8BF710023BCEB /* CameraHelperViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraHelperViewController.h; sourceTree = "<group>"; };
+		6AA4010821C8BF720023BCEB /* CameraHelperViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CameraHelperViewController.m; sourceTree = "<group>"; };
 		6AA4010B21C8C5000023BCEB /* BLE_2.1.0_20100.bin */ = {isa = PBXFileReference; lastKnownFileType = archive.macbinary; path = BLE_2.1.0_20100.bin; sourceTree = "<group>"; };
 		6AA4010C21C8C5000023BCEB /* BLE_2.0.0_20000.bin */ = {isa = PBXFileReference; lastKnownFileType = archive.macbinary; path = BLE_2.0.0_20000.bin; sourceTree = "<group>"; };
 		6AA4010D21C8C5000023BCEB /* Core_3.1.0_30100.bin */ = {isa = PBXFileReference; lastKnownFileType = archive.macbinary; path = Core_3.1.0_30100.bin; sourceTree = "<group>"; };
@@ -108,9 +114,7 @@
 				6AA400E721C8A6880023BCEB /* XFDemoViewController.h */,
 				6AA400E621C8A6880023BCEB /* XFDemoViewController.m */,
 				6ADE0B6321CE2D3300E5F633 /* CTBleHelper */,
-				6AA4010021C8BEC80023BCEB /* CTEasyLinker */,
-				6AA4010721C8BF710023BCEB /* XFCameraViewController.h */,
-				6AA4010821C8BF720023BCEB /* XFCameraViewController.m */,
+				6AA4010021C8BEC80023BCEB /* CTCameraHelper */,
 				6AA4010A21C8C4A90023BCEB /* Firmware */,
 				6AA400EA21C8A7250023BCEB /* XFConfig.h */,
 				6AA400E921C8A6ED0023BCEB /* XFPrefixHeader.pch */,
@@ -122,13 +126,15 @@
 			path = "Demo-OC";
 			sourceTree = "<group>";
 		};
-		6AA4010021C8BEC80023BCEB /* CTEasyLinker */ = {
+		6AA4010021C8BEC80023BCEB /* CTCameraHelper */ = {
 			isa = PBXGroup;
 			children = (
-				6AA4010421C8BF600023BCEB /* EasyLinkerViewController.h */,
-				6AA4010521C8BF600023BCEB /* EasyLinkerViewController.m */,
+				6AA4010721C8BF710023BCEB /* CameraHelperViewController.h */,
+				6AA4010821C8BF720023BCEB /* CameraHelperViewController.m */,
+				6A85778C21DDC0970087FCF4 /* EasyCameraViewController.h */,
+				6A85778D21DDC0970087FCF4 /* EasyCameraViewController.m */,
 			);
-			path = CTEasyLinker;
+			path = CTCameraHelper;
 			sourceTree = "<group>";
 		};
 		6AA4010A21C8C4A90023BCEB /* Firmware */ = {
@@ -147,6 +153,10 @@
 			children = (
 				6ADE0B6421CE2D6300E5F633 /* BleHelperViewController.h */,
 				6ADE0B6521CE2D6300E5F633 /* BleHelperViewController.m */,
+				6AA4010421C8BF600023BCEB /* EasyLinkerViewController.h */,
+				6AA4010521C8BF600023BCEB /* EasyLinkerViewController.m */,
+				6A85778921DDC0810087FCF4 /* SwiftLinkerViewController.h */,
+				6A85778A21DDC0810087FCF4 /* SwiftLinkerViewController.m */,
 			);
 			path = CTBleHelper;
 			sourceTree = "<group>";
@@ -295,12 +305,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6A85778B21DDC0810087FCF4 /* SwiftLinkerViewController.m in Sources */,
 				6ADE0B6621CE2D6300E5F633 /* BleHelperViewController.m in Sources */,
 				6AA400DA21C8A3D00023BCEB /* main.m in Sources */,
 				6AA400E821C8A6880023BCEB /* XFDemoViewController.m in Sources */,
-				6AA4012421CA304E0023BCEB /* XFCameraViewController.m in Sources */,
+				6AA4012421CA304E0023BCEB /* CameraHelperViewController.m in Sources */,
 				6AA400E521C8A6410023BCEB /* XFAppDelegate.m in Sources */,
 				6AA4011421C8D5050023BCEB /* EasyLinkerViewController.m in Sources */,
+				6A85778E21DDC0970087FCF4 /* EasyCameraViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
