@@ -59,4 +59,4 @@
 
 ## <小肤检测详情接口>
 > a.详情请见另外提供的相关文档；
-> b.示例代码，可见```CameraHelperViewController.m```或```EasyCameraViewController```文件中的```apiTest```部分代码；
+> b.示例代码，可见```CameraHelperViewController.m```或```EasyCameraViewController.m```文件中的```apiTest```部分代码；
