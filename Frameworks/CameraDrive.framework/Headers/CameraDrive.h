@@ -8,9 +8,9 @@
 
 /**
  CameraDrive版本号
- 更新时间：2018.12.19 09:01
+ 更新时间：2019.1.3 12:01
  */
-#define CameraDrive_SDK_VERSION @"1.0.5"
+#define CameraDrive_SDK_VERSION @"1.0.7"
 
 #import <UIKit/UIKit.h>
 
@@ -21,9 +21,10 @@
 #import "CTHotspotHelper.h"
 
 // 蓝牙&联网 连接控制
-#import "CTBleHelper.h"  // 基础
-#import "CTEasyLinker.h"  // 推荐
-#import "CTEasyUpgrade.h"  // 推荐
+#import "CTBleHelper.h"     // 基础
+#import "CTEasyLinker.h"    // 推荐  “基于 CTBleHelper ”
+#import "CTSwiftLinker.h"   // 推荐+ “基于 CTBleHelper + CTEasyLinker ”
 
 // 摄像头 控制
-#import "CTCameraHelper.h"
+#import "CTCameraHelper.h"  // 基础
+#import "CTEasyCamera.h"    // 推荐  “基于 CTCameraHelper ”
