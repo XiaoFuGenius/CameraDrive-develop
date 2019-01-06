@@ -199,6 +199,11 @@ typedef void(^CTResponseHandler)(CTBleResponseCode code, NSString * _Nullable ms
 #pragma mark >>> 设备状态配置 <<<
 
 /**
+ 关闭OV788芯片，该api不建议使用，未来可能会移除
+ */
++ (void)CloseOV788Chip:(CTResponseHandler)response;
+
+/**
  检测 设备 校准状态
  @param response 请求回调
  注1：status -1：未知状态码，0：不需要校准，1：需要校准，2：已校准

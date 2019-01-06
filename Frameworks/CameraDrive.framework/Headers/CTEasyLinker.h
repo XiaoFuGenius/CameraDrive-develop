@@ -62,18 +62,18 @@ typedef void(^CTNetworkStatusHandler)(CTBleResponseCode code, int type, NSString
  注：方法“NetworkStatusCheckOnly:Response”会触发该回调；
  注：
  */
-@property (nonatomic, copy) void(^preparedForAP)(NSString *ssid, NSString *password);
+@property (nullable, nonatomic, copy) void(^preparedForAP)(NSString *ssid, NSString *password);
 
 /**
  设备已准备好 可以启动 STA 联网模式；
  注：方法“NetworkStatusCheckOnly:Response”会触发该回调；
  */
-@property (nonatomic, copy) void(^preparedForSTA)(NSString *ssid);
+@property (nullable, nonatomic, copy) void(^preparedForSTA)(NSString *ssid);
 
 /**
  AP 联网模式，失败回调；
  */
-@property (nonatomic, copy) void(^responseForAP)(CTBleResponseCode code);
+@property (nullable, nonatomic, copy) void(^responseForAP)(CTBleResponseCode code);
 
 /** 较”CTBleHelper“，wifiStatus -101：5g检查，判定为5g网络，-102：ping检查，判定为公共验证类wifi；
  STA 联网模式，失败回调；
@@ -81,43 +81,43 @@ typedef void(^CTNetworkStatusHandler)(CTBleResponseCode code, int type, NSString
  注：方法“STA:Password”会触发该回调，含”Ping“检测；
  注：wifiStatus -3：未搜索到ssid（设备固件版本可能过旧），-2：命令请求失败或超时，-1：密码错误
  */
-@property (nonatomic, copy) void(^responseForSTA)(CTBleResponseCode code, int wifiStatus, NSString *ip);
+@property (nullable, nonatomic, copy) void(^responseForSTA)(CTBleResponseCode code, int wifiStatus, NSString *ip);
 
 /**
  设备 联网进程 执行完成回调；
  注：方法“NetworkStatusCheckOnly:Response”会触发该回调；
  */
-@property (nonatomic, copy) void(^networkLinkResponse)(CTBleResponseCode code, int type, NSString *ip);
+@property (nullable, nonatomic, copy) void(^networkLinkResponse)(CTBleResponseCode code, int type, NSString *ip);
 
 /** 可选
  STA，启动回调
  */
-@property (nonatomic, copy) void(^staStartResponse)(void);
+@property (nullable, nonatomic, copy) void(^staStartResponse)(void);
 
 /** 可选
  5G网络检测，启动和结束回调
  */
-@property (nonatomic, copy) void(^verify5GResponse)(BOOL isStart, CTBleResponseCode code);
+@property (nullable, nonatomic, copy) void(^verify5GResponse)(BOOL isStart, CTBleResponseCode code);
 
 /** 可选
  Ping检测，启动和结束回调
  */
-@property (nonatomic, copy) void(^staPingResponse)(BOOL isStart, CTBleResponseCode code);
+@property (nullable, nonatomic, copy) void(^staPingResponse)(BOOL isStart, CTBleResponseCode code);
 
 /** 可选
  AP，启动回调
  */
-@property (nonatomic, copy) void(^apStartResponse)(void);
+@property (nullable, nonatomic, copy) void(^apStartResponse)(void);
 
 /** 可选
  Hotspot，启动和结束回调
  */
-@property (nonatomic, copy) void(^hotspotResponse)(BOOL isStart, CTBleResponseCode code);
+@property (nullable, nonatomic, copy) void(^hotspotResponse)(BOOL isStart, CTBleResponseCode code);
 
 /** 可选
  AP模式，热点连接成功后的IP地址检测，启动和结束回调
  */
-@property (nonatomic, copy) void(^verifyIpAddressResponse)(BOOL isStart, CTBleResponseCode code);
+@property (nullable, nonatomic, copy) void(^verifyIpAddressResponse)(BOOL isStart, CTBleResponseCode code);
 
 /** 较”CTBleHelper“，连接后会自动获取版本号，若失败，则断开蓝牙连接，返回失败；
  与 目标设备 的蓝牙建立连接
