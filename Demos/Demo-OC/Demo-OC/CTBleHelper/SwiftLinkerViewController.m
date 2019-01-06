@@ -188,6 +188,8 @@
                 self.title = [deviceInfo componentsSeparatedByString:@"，ble"].firstObject;
                 [self updateUI4BleConnected];
 
+                [CTSwiftLinker StartNetworkLink];
+
                 break;
             }
     }
@@ -402,7 +404,7 @@
     }
 
     [self xf_Log:@"开始连接."];
-    [CTSwiftLinker Start];
+    [CTSwiftLinker StartBleLink];
 
     self.maskView.hidden = NO;
     self.start.userInteractionEnabled = NO;

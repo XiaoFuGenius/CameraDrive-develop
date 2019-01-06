@@ -64,7 +64,7 @@ typedef NS_ENUM(NSInteger, CTSwiftNetworkLinkStatus) {
 };  // 网络连接状态回调
 typedef void(^CTSwiftNetworkLinkResponse)(CTSwiftNetworkLinkStatus status, NSString *description);
 
-// STA & AP 模式，需要用户交互的联网提示框
+// STA & AP 模式，需要用户交互的联网提示框xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 typedef void(^CTSwiftAlertShowHandler)(int type, NSString *ssid);  // type 当前联网模式 1：STA，2：AP
 typedef void(^CTSwiftAlertActionCanceled)(void);        // 提示框 取消 回调
 typedef void(^CTSwiftAlertActionConfirmed)(NSString *password);  // 提示框 确认 回调
@@ -78,14 +78,14 @@ typedef void(^CTSwiftReconfigureHandler)(void);
 @property (nonatomic, assign, readonly) int type; // 当前联网模式 1：STA，2：AP - 设备成功联网后可获取（成功前获取，值不可信）
 @property (nonatomic, strong, readonly) NSString *ip;  // 设备ip地址 - 设备成功联网后可获取（成功前获取，值不可信）
 
-@property (nonatomic, copy) CTSwiftReconfigureHandler configHandler;
+@property (nullable, nonatomic, copy) CTSwiftReconfigureHandler configHandler;
 
-@property (nonatomic, copy) CTSwiftBleLinkResponse bleResponse;
-@property (nonatomic, copy) CTSwiftNetworkLinkResponse networkResponse;
+@property (nullable, nonatomic, copy) CTSwiftBleLinkResponse bleResponse;
+@property (nullable, nonatomic, copy) CTSwiftNetworkLinkResponse networkResponse;
 
-@property (nonatomic, copy) CTSwiftAlertShowHandler alertShowHandler;
-@property (nonatomic, copy, readonly) CTSwiftAlertActionCanceled canceledHandler;
-@property (nonatomic, copy, readonly) CTSwiftAlertActionConfirmed confirmedHandler;
+@property (nullable, nonatomic, copy) CTSwiftAlertShowHandler alertShowHandler;
+@property (nullable, nonatomic, copy, readonly) CTSwiftAlertActionCanceled canceledHandler;
+@property (nullable, nonatomic, copy, readonly) CTSwiftAlertActionConfirmed confirmedHandler;
 
 /**
  CTSwiftLinker 共享实例
@@ -94,9 +94,14 @@ typedef void(^CTSwiftReconfigureHandler)(void);
 + (CTSwiftLinker *)SharedLinker;
 
 /**
- 开启设备连接！
+ 开启设备蓝牙连接！
  */
-+ (void)Start;
++ (void)StartBleLink;
+
+/**
+ 开启设备网络连接！
+ */
++ (void)StartNetworkLink;
 
 /**
  连接中取消需调用该方法！
