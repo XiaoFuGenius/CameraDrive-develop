@@ -1295,6 +1295,13 @@
 - (void)bleVersionUpgradeLimitedTargetVersion:(NSInteger)targetVersion
                                    Completion:(void (^)(void))completion
 {
+    if (self.versionCheckDisabled) {
+        if (completion) {
+            completion();
+        }
+        return;
+    }
+
     NSInteger bleVersion = [[CTBleHelper DeviceInfoCache][@"BleVersion"] integerValue];
     NSInteger coreVersion =  [[CTBleHelper DeviceInfoCache][@"CoreVersion"] integerValue];
 
@@ -1399,6 +1406,13 @@
 - (void)coreVersionUpgradeLimitedTargetVersion:(NSInteger)targetVersion
                                     Completion:(void (^)(void))completion
 {
+    if (self.versionCheckDisabled) {
+        if (completion) {
+            completion();
+        }
+        return;
+    }
+
     NSInteger bleVersion = [[CTBleHelper DeviceInfoCache][@"BleVersion"] integerValue];
     //NSInteger coreVersion =  [[CTBleHelper DeviceInfoCache][@"CoreVersion"] integerValue];
 
@@ -1499,12 +1513,14 @@
 
 - (void)calibration:(UIButton *)sender
 {
-    NSInteger bleVersion = [[CTBleHelper DeviceInfoCache][@"BleVersion"] integerValue];
-    NSInteger coreVersion =  [[CTBleHelper DeviceInfoCache][@"CoreVersion"] integerValue];
+    if (!self.versionCheckDisabled) {
+        NSInteger bleVersion = [[CTBleHelper DeviceInfoCache][@"BleVersion"] integerValue];
+        NSInteger coreVersion =  [[CTBleHelper DeviceInfoCache][@"CoreVersion"] integerValue];
 
-    if (bleVersion < 20100 || coreVersion < 30100) {
-        [self xf_Log:@"固件版本不符合要求，已取消."];
-        return;
+        if (bleVersion < 20100 || coreVersion < 30100) {
+            [self xf_Log:@"固件版本不符合要求，已取消."];
+            return;
+        }
     }
 
     [self xf_Log:@"开始检查当前校准状态..."];
@@ -1534,12 +1550,14 @@
 
 - (void)recalibration:(UIButton *)sender
 {
-    NSInteger bleVersion = [[CTBleHelper DeviceInfoCache][@"BleVersion"] integerValue];
-    NSInteger coreVersion =  [[CTBleHelper DeviceInfoCache][@"CoreVersion"] integerValue];
+    if (!self.versionCheckDisabled) {
+        NSInteger bleVersion = [[CTBleHelper DeviceInfoCache][@"BleVersion"] integerValue];
+        NSInteger coreVersion =  [[CTBleHelper DeviceInfoCache][@"CoreVersion"] integerValue];
 
-    if (bleVersion < 20100 || coreVersion < 30100) {
-        [self xf_Log:@"固件版本不符合要求，已取消."];
-        return;
+        if (bleVersion < 20100 || coreVersion < 30100) {
+            [self xf_Log:@"固件版本不符合要求，已取消."];
+            return;
+        }
     }
 
     [self xf_Log:@"开始检查当前校准状态..."];
@@ -1585,12 +1603,14 @@
 
 - (void)restartNVDS:(UIButton *)sender
 {
-    NSInteger bleVersion = [[CTBleHelper DeviceInfoCache][@"BleVersion"] integerValue];
-    NSInteger coreVersion =  [[CTBleHelper DeviceInfoCache][@"CoreVersion"] integerValue];
+    if (!self.versionCheckDisabled) {
+        NSInteger bleVersion = [[CTBleHelper DeviceInfoCache][@"BleVersion"] integerValue];
+        NSInteger coreVersion =  [[CTBleHelper DeviceInfoCache][@"CoreVersion"] integerValue];
 
-    if (bleVersion < 20100 || coreVersion < 30100) {
-        [self xf_Log:@"固件版本不符合要求，已取消"];
-        return;
+        if (bleVersion < 20100 || coreVersion < 30100) {
+            [self xf_Log:@"固件版本不符合要求，已取消"];
+            return;
+        }
     }
 
     [self xf_Log:@"开始执行 一键恢复，校准配置..."];
@@ -1611,12 +1631,14 @@
 #pragma mark > wiredMode <
 - (void)wiredMode:(UIButton *)sender
 {
-    NSInteger bleVersion = [[CTBleHelper DeviceInfoCache][@"BleVersion"] integerValue];
-    NSInteger coreVersion =  [[CTBleHelper DeviceInfoCache][@"CoreVersion"] integerValue];
+    if (!self.versionCheckDisabled) {
+        NSInteger bleVersion = [[CTBleHelper DeviceInfoCache][@"BleVersion"] integerValue];
+        NSInteger coreVersion =  [[CTBleHelper DeviceInfoCache][@"CoreVersion"] integerValue];
 
-    if (bleVersion < 20100 || coreVersion < 30100) {
-        [self xf_Log:@"固件版本不符合要求，已取消"];
-        return;
+        if (bleVersion < 20100 || coreVersion < 30100) {
+            [self xf_Log:@"固件版本不符合要求，已取消"];
+            return;
+        }
     }
 
     XFWeakSelf(weakSelf);
