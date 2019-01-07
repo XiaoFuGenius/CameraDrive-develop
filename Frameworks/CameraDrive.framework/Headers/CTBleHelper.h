@@ -201,7 +201,7 @@ typedef void(^CTResponseHandler)(CTBleResponseCode code, NSString * _Nullable ms
 /**
  关闭OV788芯片，该api不建议使用，未来可能会移除
  */
-+ (void)CloseOV788Chip:(CTResponseHandler)response;
++ (void)CloseOV788Chip:(nullable CTResponseHandler)response;
 
 /**
  检测 设备 校准状态
