@@ -14,8 +14,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (strong, nonatomic) UIWindow *window;
 
-+ (CGFloat)GetWidth;
-+ (CGFloat)GetHeight;
 + (void)XF_ApplicationOpenSettingsType:(int)type;
 
 @end

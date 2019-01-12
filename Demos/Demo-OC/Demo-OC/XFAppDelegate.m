@@ -14,11 +14,6 @@
 
 @implementation XFAppDelegate
 
-- (UIInterfaceOrientationMask)application:(UIApplication *)application supportedInterfaceOrientationsForWindow:(UIWindow *)window
-{
-    return UIInterfaceOrientationMaskPortrait;  // 仅支持单一竖直方向
-}
-
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
 
@@ -71,16 +66,6 @@
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     NSLog(@"WARNING. applicationWillTerminate.");
-}
-
-+ (CGFloat)GetWidth
-{
-    return XFWidth > XFHeight ? XFHeight:XFWidth;
-}
-
-+ (CGFloat)GetHeight
-{
-    return XFWidth > XFHeight ? XFWidth:XFHeight;
 }
 
 + (void)XF_ApplicationOpenSettingsType:(int)type

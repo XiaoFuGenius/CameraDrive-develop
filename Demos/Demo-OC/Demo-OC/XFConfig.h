@@ -9,7 +9,7 @@
 #ifndef XFConfig_h
 #define XFConfig_h
 
-#define kWidth [XFAppDelegate GetWidth]
-#define kHeight [XFAppDelegate GetHeight]
+#define kWidth XFWidth
+#define kHeight XFHeight
 
 #endif /* XFConfig_h */
