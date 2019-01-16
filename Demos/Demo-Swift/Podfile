@@ -1,0 +1,26 @@
+# Uncomment the next line to define a global platform for your project
+
+    #source 'https://github.com/artsy/Specs.git'
+    source 'https://github.com/CocoaPods/Specs.git'
+    source 'https://github.com/XiaoFuGenius/xiaofu-specs.git'
+
+  platform :ios, '8.0'
+  
+  target 'Demo-Swift' do
+
+    # Pods for Demo-Swift
+    # pod install --verbose --no-repo-update
+    # pod update --verbose --no-repo-update
+
+    #开发阶段，支持模拟器调试UI
+    pod 'CameraDrive-develop'
+    #pod 'XiaoFuTech-develop'
+
+    #发布阶段，不支持模拟器调试UI
+    #pod 'CameraDrive-release'
+    #pod 'XiaoFuTech-release'
+
+    # Comment this line if you're not using Swift and don't want to use dynamic frameworks
+    use_frameworks!
+
+end

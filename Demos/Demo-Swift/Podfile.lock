@@ -1,0 +1,16 @@
+PODS:
+  - CameraDrive-develop (1.0.12)
+
+DEPENDENCIES:
+  - CameraDrive-develop
+
+SPEC REPOS:
+  https://github.com/XiaoFuGenius/xiaofu-specs.git:
+    - CameraDrive-develop
+
+SPEC CHECKSUMS:
+  CameraDrive-develop: 4923d65e33c9ace959285edc2254c8455ea11b8a
+
+PODFILE CHECKSUM: 205150facda66a55c7cf6e33ae0124545dd5f80a
+
+COCOAPODS: 1.5.3

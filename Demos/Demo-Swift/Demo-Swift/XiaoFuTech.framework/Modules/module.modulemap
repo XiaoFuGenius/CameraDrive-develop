@@ -1,0 +1,6 @@
+framework module XiaoFuTech {
+  umbrella header "XiaoFuTech.h"
+
+  export *
+  module * { export * }
+}

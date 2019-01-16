@@ -1,0 +1,10 @@
+/* 
+  InfoPlist.strings
+  Demo-Swift
+
+  Created by 胡文峰 on 2019/1/7.
+  Copyright © 2019 XIAOFUTECH. All rights reserved.
+*/
+
+
+CFBundleDisplayName = "XF Sdk Demo";

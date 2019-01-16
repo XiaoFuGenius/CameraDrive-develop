@@ -1,0 +1,6 @@
+framework module CameraDrive {
+  umbrella header "CameraDrive.h"
+
+  export *
+  module * { export * }
+}
