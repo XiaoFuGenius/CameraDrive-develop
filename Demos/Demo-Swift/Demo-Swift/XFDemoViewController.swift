@@ -107,8 +107,8 @@ class XFDemoViewController: UIViewController {
         //let Clz = NSClassFromString(className) as! UIViewController.Type
         //let ctr: UIViewController = Clz.init()
 
-        //let ctr: UIViewController = SwiftLinkerViewController()
-        //self.navigationController?.pushViewController(ctr, animated: true)
+        let ctr: UIViewController = SwiftLinkerViewController()
+        self.navigationController?.pushViewController(ctr, animated: true)
     }
 
 }

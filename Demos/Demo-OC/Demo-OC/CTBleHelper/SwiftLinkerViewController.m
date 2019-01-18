@@ -234,13 +234,13 @@
             case CTSwiftNetworkLinkPingFailed:{
                 [self xf_Log:description];
 
-                UIAlertController *alert5G = [UIAlertController
+                UIAlertController *alertPing = [UIAlertController
                                               alertControllerWithTitle:@"ping检查，判定为公共验证类wifi"
                                               message:@"设备 当前“不支持”公共验证类wifi 联网，请使用AP模式联网或重试."
                                               preferredStyle:UIAlertControllerStyleAlert];
-                [alert5G addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleCancel
+                [alertPing addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleCancel
                                                           handler:nil]];
-                [self showAlert:alert5G Sender:self.start];
+                [self showAlert:alertPing Sender:self.start];
 
                 self.maskView.hidden = YES;
                 break;

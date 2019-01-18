@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6A39DFCC21ED77C200A30399 /* CTSimpleNetwork.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A39DFCB21ED77C200A30399 /* CTSimpleNetwork.m */; };
 		6A85778B21DDC0810087FCF4 /* SwiftLinkerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A85778A21DDC0810087FCF4 /* SwiftLinkerViewController.m */; };
 		6A85778E21DDC0970087FCF4 /* EasyCameraViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A85778D21DDC0970087FCF4 /* EasyCameraViewController.m */; };
 		6AA400D421C8A3D00023BCEB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6AA400D321C8A3D00023BCEB /* Assets.xcassets */; };
@@ -40,6 +41,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		6A39DFCA21ED77C200A30399 /* CTSimpleNetwork.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CTSimpleNetwork.h; sourceTree = "<group>"; };
+		6A39DFCB21ED77C200A30399 /* CTSimpleNetwork.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CTSimpleNetwork.m; sourceTree = "<group>"; };
 		6A85778921DDC0810087FCF4 /* SwiftLinkerViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SwiftLinkerViewController.h; sourceTree = "<group>"; };
 		6A85778A21DDC0810087FCF4 /* SwiftLinkerViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SwiftLinkerViewController.m; sourceTree = "<group>"; };
 		6A85778C21DDC0970087FCF4 /* EasyCameraViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EasyCameraViewController.h; sourceTree = "<group>"; };
@@ -86,6 +89,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6A39DFCD21ED7BF500A30399 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				6A39DFCA21ED77C200A30399 /* CTSimpleNetwork.h */,
+				6A39DFCB21ED77C200A30399 /* CTSimpleNetwork.m */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
 		6AA400BE21C8A3D00023BCEB = {
 			isa = PBXGroup;
 			children = (
@@ -116,6 +128,7 @@
 				6ADE0B6321CE2D3300E5F633 /* CTBleHelper */,
 				6AA4010021C8BEC80023BCEB /* CTCameraHelper */,
 				6AA4010A21C8C4A90023BCEB /* Firmware */,
+				6A39DFCD21ED7BF500A30399 /* Network */,
 				6AA400EA21C8A7250023BCEB /* XFConfig.h */,
 				6AA400E921C8A6ED0023BCEB /* XFPrefixHeader.pch */,
 				6ADE0B7921D0C5A300E5F633 /* InfoPlist.strings */,
@@ -312,6 +325,7 @@
 				6AA4012421CA304E0023BCEB /* CameraHelperViewController.m in Sources */,
 				6AA400E521C8A6410023BCEB /* XFAppDelegate.m in Sources */,
 				6AA4011421C8D5050023BCEB /* EasyLinkerViewController.m in Sources */,
+				6A39DFCC21ED77C200A30399 /* CTSimpleNetwork.m in Sources */,
 				6A85778E21DDC0970087FCF4 /* EasyCameraViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

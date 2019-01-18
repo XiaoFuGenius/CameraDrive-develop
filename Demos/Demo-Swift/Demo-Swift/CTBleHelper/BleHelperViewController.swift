@@ -438,7 +438,7 @@ class BleHelperViewController: UIViewController {
             weakSelf?.maskView.isHidden = true
             weakSelf?.xf_Log(logX: "已取消ap连接.")
         }))
-        apAlert.addAction(UIAlertAction.init(title: "", style: UIAlertAction.Style.default, handler: { (action: UIAlertAction) in
+        apAlert.addAction(UIAlertAction.init(title: "前往", style: UIAlertAction.Style.default, handler: { (action: UIAlertAction) in
             XF_ApplicationOpenSettings(type: 2)
 
             weakSelf?.apLinkCheck = true
@@ -1710,7 +1710,8 @@ class BleHelperViewController: UIViewController {
 
         weak var weakSelf = self
 
-        let cameraCtr: EasyCameraViewController = EasyCameraViewController()
+        let cameraCtr: CameraHelperViewController = CameraHelperViewController()
+        //let cameraCtr: EasyCameraViewController = EasyCameraViewController()
         cameraCtr.ip = self.ip as String
         cameraCtr.handler_log = { (log: NSString) in
             weakSelf?.xf_Log(logX: log)

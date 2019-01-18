@@ -8,12 +8,7 @@
 
 #import "CameraHelperViewController.h"
 #import <Photos/Photos.h>
-
-#import "XFNetworkingSdkHelper.h"
-#define kAuthKey @"922f183b-ea61-422d-8d3a-deec762e70f2"  // 修改为 自己的Key
-#define kServerRootUrl @"https://api.xiaofutech.com/"
-#define kServerUrl(Url) [NSString stringWithFormat:@"%@%@", kServerRootUrl, Url]
-
+#import "CTSimpleNetwork.h"
 
 // Privacy Status 状态
 typedef NS_ENUM(NSInteger, XFUserAuthorizationStatus) {
@@ -354,7 +349,7 @@ typedef void (^XFUserRightsCallBack)(BOOL authorized, XFUserAuthorizationStatus 
         weakSelf.appIsActived = noti.name == UIApplicationDidBecomeActiveNotification;
 
         // 应用活动状态发生变化，取消未执行操作...
-        [NSObject cancelPreviousPerformRequestsWithTarget:self];
+        [NSObject cancelPreviousPerformRequestsWithTarget:weakSelf];
 
         // 针对应用当前活动状态，准备执行相关操作...
         if (!weakSelf.appIsActived) {
@@ -555,9 +550,9 @@ typedef void (^XFUserRightsCallBack)(BOOL authorized, XFUserAuthorizationStatus 
     XFWeakSelf(weakSelf);
 
     NSDictionary *param = @{@"appId":kAuthKey};
-    [XFNetworkingSdkHelper PostHttpDataWithUrlStr:kServerUrl(@"external/putDistinguishResult2")
-                                            Param:param
-                        ConstructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+    [CTSimpleNetwork PostHttpDataWithUrlStr:kServerUrl(@"external/putDistinguishResult2")
+                                      Param:param
+                  ConstructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
 
         for (int i = 0; i < blockImageDict.allKeys.count; i++) {
             NSString *key = blockImageDict.allKeys[i];
@@ -607,9 +602,9 @@ typedef void (^XFUserRightsCallBack)(BOOL authorized, XFUserAuthorizationStatus 
     NSDictionary *param = @{@"appId":kAuthKey,
                             @"distinguishId":distinguishId};
 
-    [XFNetworkingSdkHelper PostHttpDataWithUrlStr:kServerUrl(@"external/distinguishDetail2")
-                                            Param:param ConstructingBodyWithBlock:nil Progress:nil
-                                     SuccessBlock:^(id responseObject) {
+    [CTSimpleNetwork PostHttpDataWithUrlStr:kServerUrl(@"external/distinguishDetail2")
+                                      Param:param ConstructingBodyWithBlock:nil Progress:nil
+                               SuccessBlock:^(id responseObject) {
 
         [XFLoadingWindow Hide];
         UIButton *apiTest2Btn = weakSelf.displayView.subviews.lastObject;

@@ -79,15 +79,14 @@
             } else if (2==type) {  // WiFi
                 urlString = @"jQhHpJ9VKHSuHiR5IhA4gfdeNW6UJznZBCmDQE0+Iug=";
             }
-            urlString = [urlString xf_DecryptAES128];
         } else {
             if (1==type) {  // 蓝牙
                 urlString = @"kPA0CM7evkwDf8Z6cFz3MRnN4AiXJMulSCc0m/dTSvM=";
             } else if (2==type) {  // WiFi
                 urlString = @"tpc9U7wbJZEVbQnLoj+ErA==";
             }
-            urlString = [urlString xf_DecryptAES128];
         }
+        urlString = [urlString xf_DecryptAES128];
     }
 
     UIApplication *sharedApplication = [UIApplication sharedApplication];

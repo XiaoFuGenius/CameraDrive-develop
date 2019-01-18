@@ -51,13 +51,45 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Demo-OC/CTBleHelper/SwiftLinkerViewController.m"
-            timestampString = "568467523.271347"
+            filePath = "../../../CameraDrive-iOS/CameraDrive/CameraDrive/CTBle/CTBleHelper.m"
+            timestampString = "568967192.580139"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "677"
-            endingLineNumber = "677"
-            landmarkName = "-startUpdateBle:"
+            startingLineNumber = "1114"
+            endingLineNumber = "1114"
+            landmarkName = "-ctBleBase:connectStatus:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../../CameraDrive-iOS/CameraDrive/CameraDrive/CTBle/CTBleHelper.m"
+            timestampString = "568967192.580236"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "1078"
+            endingLineNumber = "1078"
+            landmarkName = "-connectSuccess"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../../CameraDrive-iOS/CameraDrive/CameraDrive/CTBle/CTBleHelper.m"
+            timestampString = "568967192.580313"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "1091"
+            endingLineNumber = "1091"
+            landmarkName = "-connectSuccess"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

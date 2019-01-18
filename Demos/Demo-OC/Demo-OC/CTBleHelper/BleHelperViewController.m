@@ -78,6 +78,9 @@
 - (void)viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];
 
+    [self.autoBindTimer invalidate];
+    self.autoBindTimer = nil;
+
     [NSObject cancelPreviousPerformRequestsWithTarget:self];
     if (self.shouldReset) {
         [CTBleHelper StopScan];
@@ -92,6 +95,9 @@
 
     self.title = @"CTBleHelper";
     self.view.backgroundColor = XFColor(0xf6f6f6, 1.0f);
+
+    self.isAutoBind = YES;
+    self.autoByRSSI = YES;
 
     [self customUI];
     [self everythingIsReady];
@@ -132,9 +138,6 @@
     self.startScan.userInteractionEnabled = YES;
     self.startScan.selected = YES;
     [self xf_Log:@"准备就绪..."];
-
-    self.isAutoBind = YES;
-    self.autoByRSSI = YES;
 
     [self configXiaoFuSdk];
 
@@ -409,13 +412,13 @@
 
     } else if (wifiStatus == -102) {
 
-        UIAlertController *alert5G = [UIAlertController
+        UIAlertController *alertPing = [UIAlertController
                                       alertControllerWithTitle:@"ping检查，判定为公共验证类wifi"
                                       message:@"设备 当前“不支持”公共验证类wifi 联网，请使用AP模式联网或重试."
                                       preferredStyle:UIAlertControllerStyleAlert];
-        [alert5G addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleCancel
+        [alertPing addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleCancel
                                                   handler:nil]];
-        [self showAlert:alert5G Sender:self.autoLink];
+        [self showAlert:alertPing Sender:self.autoLink];
     }
 }
 
@@ -438,8 +441,6 @@
     } else {
         [self xf_Log:@"设备联网失败，请重新尝试(若多次联网失败，建议先重启设备)."];
     }
-
-    self.maskView.hidden = YES;
 }
 
 #pragma mark > STA Mode <
@@ -491,7 +492,7 @@
     UIAlertController *apAlert = [UIAlertController
                                   alertControllerWithTitle:@"前往设置连接指定热点" message:ssid
                                   preferredStyle:UIAlertControllerStyleAlert];
-    [apAlert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault
+    [apAlert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel
                                               handler:^(UIAlertAction * _Nonnull action) {
         weakSelf.maskView.hidden = YES;
         [weakSelf xf_Log:@"已取消ap连接."];
@@ -644,7 +645,7 @@
             int newValue = value+6;
             newValue = newValue<=97?newValue:97;
             if (response) {
-                response(CTBleResponseOK, newValue, @"OTA_RSP_PROGRESS");
+                response(CTBleResponseOK, newValue, @"CORE_OTA_SOCKET_SEND_PROGRESS");
             }
         } else if (status==CORE_OTA_DATA_CRC) {
             if (response) {
@@ -1169,7 +1170,7 @@
         dispatch_async(dispatch_get_main_queue(), ^{
             weakSelf.maskView.hidden = YES;
             if (code==CTBleResponseOK) {
-                [weakSelf xf_Log:[NSString stringWithFormat:@"MAC获取成功：%@.", mac]];
+                [weakSelf xf_Log:[NSString stringWithFormat:@"MAC信息获取成功：%@.", mac]];
             } else {
                 [weakSelf xf_Log:[NSString stringWithFormat:@"MAC信息获取失败."]];
             }
@@ -1346,7 +1347,7 @@
                                                           pathForResource:verName ofType:@"bin"]];
 
         weakSelf.upgradeValue = -1;
-        [self UpdateBLE:bleData Response:^(CTBleResponseCode code, int value,
+        [weakSelf UpdateBLE:bleData Response:^(CTBleResponseCode code, int value,
                                                    NSString * _Nonnull msg) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 if (code==CTBleResponseError) {
@@ -1456,7 +1457,7 @@
                                                            pathForResource:verName ofType:@"bin"]];
 
         weakSelf.upgradeValue = -1;
-        [self UpdateCore:coreData Response:^(CTBleResponseCode code, int value,
+        [weakSelf UpdateCore:coreData Response:^(CTBleResponseCode code, int value,
                                                      NSString * _Nonnull msg) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 if (code==CTBleResponseError) {
@@ -1568,6 +1569,7 @@
         dispatch_async(dispatch_get_main_queue(), ^{
             if (code==CTBleResponseError) {
                 weakSelf.maskView.hidden = YES;
+                [weakSelf xf_Log:@"获取校准状态 请求失败."];
                 return;
             }
 

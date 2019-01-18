@@ -72,6 +72,8 @@ class EasyLinkerViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
 
+        self.navigationController?.navigationBar.isTranslucent = false
+
         self.title = "CTEasyLinker";
         self.view.backgroundColor = UIColor.XF_f6Gray
 
@@ -139,7 +141,9 @@ class EasyLinkerViewController: UIViewController {
         CTEasyLinker.sharedEsay().hotspotEnabled = true
 
         CTEasyLinker.sharedEsay().preparedForAP = { (ssid, password) in
-            
+            DispatchQueue.main.async {
+                weakSelf?.preparedForAP(ssid: ssid as String, password: password as String)
+            }
         }
 
         CTEasyLinker.sharedEsay().preparedForSTA = { (ssid: String) in
@@ -412,7 +416,7 @@ class EasyLinkerViewController: UIViewController {
                                                 weakSelf?.maskView.isHidden = true
                                                 weakSelf?.xf_Log(logX: "已取消ap连接.")
         }))
-        apAlert.addAction(UIAlertAction.init(title: "", style: UIAlertAction.Style.default, handler: { (action: UIAlertAction) in
+        apAlert.addAction(UIAlertAction.init(title: "前往", style: UIAlertAction.Style.default, handler: { (action: UIAlertAction) in
             XF_ApplicationOpenSettings(type: 2)
 
             weakSelf?.apLinkCheck = true
@@ -1357,6 +1361,7 @@ class EasyLinkerViewController: UIViewController {
 
         weak var weakSelf = self
 
+        //let cameraCtr: CameraHelperViewController = CameraHelperViewController()
         let cameraCtr: EasyCameraViewController = EasyCameraViewController()
         cameraCtr.ip = self.ip as String
         cameraCtr.handler_log = { (log: NSString) in
