@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-#define kAuthKey @"922f183b-ea61-422d-8d3a-deec762e70f2"  // ai测肤接口授权key
+#define kAuthKey @""  // ai测肤接口授权key
 #define kServerRootUrl @"https://api.xiaofutech.com/"  // ai测肤接口域名地址
 #define kServerUrl(Url) [NSString stringWithFormat:@"%@%@", kServerRootUrl, Url]
 
