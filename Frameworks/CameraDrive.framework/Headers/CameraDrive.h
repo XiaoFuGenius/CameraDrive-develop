@@ -8,9 +8,9 @@
 
 /**
  CameraDrive版本号
- 更新时间：2019.1.12 09:02
+ 更新时间：2019.02.25 11:18
  */
-#define CameraDrive_SDK_VERSION @"1.0.12"
+#define CameraDrive_SDK_VERSION @"1.0.13"
 
 #import <UIKit/UIKit.h>
 
@@ -28,3 +28,6 @@
 // 摄像头 控制
 #import "CTCameraHelper.h"  // 基础
 #import "CTEasyCamera.h"    // 推荐  “基于 CTCameraHelper ”
+
+// 升级模块
+#import "CTUpgradeHelper.h" // 基础（验证中，暂不建议使用）

@@ -68,6 +68,12 @@ typedef void(^CTConfigDebugLogHandler)(NSString *log);
 @property (nonatomic, copy) CTConfigDebugLogHandler debugLogHandler;
 
 /**
+ 热点模式，信道指定（STA模式，信道由产生WiFi信号的路由器本身决定）
+ -1 随机信道，0 - 13 指定信道(不建议选择 12，13 信道)
+ */
+@property (nonatomic, assign) NSInteger channelSetting;
+
+/**
  指定的 分隔字符串数组
  拆分 设备 的蓝牙识别字符串，拆分成 Name 和 BindID；默认 @[@"!@"]；
  */

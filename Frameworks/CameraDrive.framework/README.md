@@ -19,5 +19,16 @@
 ###### ~v1.0.9（ 更新时间：2019.1.6）
 >部分 细节优化与问题修复；
 
-###### ~v1.0.10（ 更新时间：2019.1.7）
+###### ~v1.0.10（ 更新时间：2019.01.07）
 >部分 问题修复；
+
+###### ~v1.0.12（ 更新时间：2019.01.12 09:02）
+>部分 问题修复；
+
+###### ~v1.0.13（ 更新时间：2019.02.25 11:18）
+>CTConfig 增加属性 channelSetting -> AP模式 增加 信道选择 功能；
+>CTEasyLinker 增加属性 ip ；
+>CTSwiftLinker 增加 设备蓝牙连接中状态 CTSwiftBleLinkDeviceConnecting ；
+>CTEasyCamera 增加属性 ignoredAppActivedStatus ；
+>其它细节问题优化等；
+
