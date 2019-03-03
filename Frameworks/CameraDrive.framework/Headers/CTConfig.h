@@ -45,6 +45,7 @@
 #define     CORE_OTA_ERROR_DATA_UPDATE                  0x11
 
 typedef void(^CTConfigDebugLogHandler)(NSString *log);
+typedef void(^CTConfigBlueStripDetectionHandler)(UIImage *blueStripImage);
 
 @interface CTConfig : NSObject
 
@@ -68,8 +69,16 @@ typedef void(^CTConfigDebugLogHandler)(NSString *log);
 @property (nonatomic, copy) CTConfigDebugLogHandler debugLogHandler;
 
 /**
+ 蓝条检测 开关
+ 开启以后，摄像头启动时，对 前十帧图像 执行 蓝条检测 算法，默认关闭；
+ 对该Block赋值即意味着开启蓝条检测，同时，对于检测到的蓝条图片，会通过Block回传
+ */
+@property (nonatomic, copy) CTConfigBlueStripDetectionHandler blueStripDetectionHandler;
+
+/**
  热点模式，信道指定（STA模式，信道由产生WiFi信号的路由器本身决定）
- -1 随机信道，0 - 13 指定信道(不建议选择 12，13 信道)
+ -1 随机信道，0 - 13 指定信道(不建议选择 12，13 信道)，默认随机信道；
+ 另：当前 Android 默认 信道9
  */
 @property (nonatomic, assign) NSInteger channelSetting;
 
@@ -102,6 +111,13 @@ typedef void(^CTConfigDebugLogHandler)(NSString *log);
  @return ssid
  */
 + (NSString *)GetSSID;
+
+/**
+ 校验 图片中是否 有 蓝条
+ @param image 图片数据
+ @return 校验结果
+ */
++ (BOOL)ExamineBlueStripImage:(UIImage *)image;
 
 #pragma mark >>> LIFE CYCLE <<<
 /**
