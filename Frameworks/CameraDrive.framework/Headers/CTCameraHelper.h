@@ -24,6 +24,7 @@ typedef void(^CTCameraStatusHandler)(NSInteger status, NSString * _Nullable desc
 @property (nonatomic, assign) int       port;  // “视频流”数据传输的”端口号“，默认 1000；
 // 以下属性，“loadBearerView” 成功调用后，变更无效
 @property (nonatomic, assign) BOOL      isRetroflexion;  // “视频流渲染”时是否"镜像"处理；YES - "镜像"处理，可用于C端用户；默认 NO；
+@property (nonatomic, assign, readonly) BOOL isBlueStripConfirmed;  // 未成功激活摄像头时，触发原因是否为 蓝条检测
 
 #pragma mark >>> 初始化 配置 <<<
 /**

@@ -119,6 +119,7 @@ typedef void(^CTNetworkStatusHandler)(CTBleResponseCode code, int type, NSString
  */
 @property (nullable, nonatomic, copy) void(^verifyIpAddressResponse)(BOOL isStart, CTBleResponseCode code);
 
+@property (nonatomic, assign, readonly) int type; // 当前联网模式 1：STA，2：AP - 设备成功联网后可获取（成功前获取，值不可信）
 @property (nonatomic, strong, readonly) NSString *ip;  // 设备ip地址 - 设备成功联网后可获取（成功前获取，值不可信）
 
 /** 较”CTBleHelper“，连接后会自动获取版本号，若失败，则断开蓝牙连接，返回失败；

@@ -34,6 +34,9 @@
 
 ###### ~v1.0.15（ 更新时间：2019.03.01 23:17）
 >CTConfig 增加属性 blueStripDetectionHandler -> 增加 启动时 蓝条 检测功能；
+>CTCameraDriveHelper 增加辅助属性 isBlueStripConfirmed
 
+###### ~v1.0.16（ 更新时间：2019.03.06 15:47）
+>其它细节问题优化等；
 
 
