@@ -10,7 +10,7 @@
 
 Pod::Spec.new do |s|
   s.name         = "CameraDrive-develop" 		# 项目名称
-  s.version      = "1.0.16" 		# 版本号 与 你仓库的 标签号 对应
+  s.version      = "1.0.17" 		# 版本号 与 你仓库的 标签号 对应
   s.license      = "MIT" 	 # 开源证书
   s.summary      = "iOS 快捷开发工具包 CameraDrive.framework Develop." 	# 项目简介
   s.deprecated = false

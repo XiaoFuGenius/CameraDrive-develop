@@ -77,7 +77,7 @@ typedef void(^CTConfigBlueStripDetectionHandler)(UIImage *blueStripImage);
 
 /**
  热点模式，信道指定（STA模式，信道由产生WiFi信号的路由器本身决定）
- -1 随机信道，0 - 13 指定信道(不建议选择 12，13 信道)，默认随机信道；
+ -1 随机信道，1 - 13 指定信道(不建议选择 12，13 信道)，默认随机信道；
  另：当前 Android 默认 信道9
  */
 @property (nonatomic, assign) NSInteger channelSetting;

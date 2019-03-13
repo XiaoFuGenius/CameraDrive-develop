@@ -10,10 +10,15 @@
 
 /**
  接口回调类型，
- @param status 回调状态值 ~> 0：成功，状态正常；
+ @param status 回调状态值 ~> 0：成功，状态正常；-1：失败；
  @param description 回调描述字符串；
  */
 typedef void(^CTCameraStatusHandler)(NSInteger status, NSString * _Nullable description);
+
+/**
+ 因 蓝条检测 触发的摄像头重启通知
+ */
+extern NSNotificationName const _Nullable CT_Camera_RestartByBSD;
 
 @interface CTCameraHelper : NSObject
 
