@@ -184,6 +184,7 @@ typedef void(^CTResponseHandler)(CTBleResponseCode code, NSString * _Nullable ms
  蓝牙固件升级，升级期间，会多次调用 response
  @param firmware 蓝牙升级数据包
  @param response 升级状态回调
+ 注：status 和 value 请参照 CTConfig 中的预定义 宏 进行处理；
  */
 + (void)UpdateBLE:(NSData *_Nullable)firmware
          Response:(nullable void(^)(int status, int value))response;
@@ -192,6 +193,7 @@ typedef void(^CTResponseHandler)(CTBleResponseCode code, NSString * _Nullable ms
  核心固件升级，升级期间，会多次调用 response
  @param firmware 核心升级数据包
  @param response 升级状态回调
+ 注：status 和 value 请参照 CTConfig 中的预定义 宏 进行处理；
  */
 + (void)UpdateCore:(NSData *_Nullable)firmware
           Response:(nullable void(^)(int status, int value))response;

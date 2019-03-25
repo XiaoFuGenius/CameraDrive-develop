@@ -17,6 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign, readonly) BOOL cameraIsStarting;          // 摄像头是否正在启动
 @property (nonatomic, assign, readonly) BOOL cameraIsCapturing;         // 摄像是否头正在采集图像
 
+@property (nonatomic, assign) BOOL ignoredAppActivedStatus;             // 中断内部代码针对 应用前后台操作 的回应
 @property (nonatomic, assign, readonly) BOOL appIsActived;              // 应用是否已激活 "applicationDidBecomeActive"
 @property (nonatomic, assign, readonly) BOOL cameraIsActived;           // 摄像头是否已打开
 @property (nonatomic, assign, readonly) BOOL cameraIsRestart;           // 摄像头是否正在重启

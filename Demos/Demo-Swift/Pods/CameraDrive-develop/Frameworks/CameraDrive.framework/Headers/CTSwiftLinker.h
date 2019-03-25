@@ -36,6 +36,7 @@ typedef NS_ENUM(NSInteger, CTSwiftBleLinkStatus) {
     //CTSwiftBleLinkDeviceMultiple,       // 设备 搜索到多台设备 - 无效de枚举值
     CTSwiftBleLinkDeviceNotFound,       // 设备 未发现 -> 设备未开机，或目标设备蓝牙信号强度弱
 
+    CTSwiftBleLinkDeviceConnecting,     // 设备 连接中
     CTSwiftBleLinkDeviceSucceed,        // 设备 已连接
     CTSwiftBleLinkDeviceFailed,         // 设备 未成功连接
 };  // 蓝牙连接状态回调
@@ -60,11 +61,11 @@ typedef NS_ENUM(NSInteger, CTSwiftNetworkLinkStatus) {
     CTSwiftNetworkLinkApFailed,         // AP模式 连接命令请求失败
 
     CTSwiftNetworkLinkSucceed,          // 设备 已联网
-    CTSwiftNetworkLinkFailed,           // 设备 未成功联网
+    CTSwiftNetworkLinkFailed,           // 设备 未成功联网，当前联网模式可见 属性type
 };  // 网络连接状态回调
 typedef void(^CTSwiftNetworkLinkResponse)(CTSwiftNetworkLinkStatus status, NSString *description);
 
-// STA & AP 模式，需要用户交互的联网提示框xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+// STA & AP 模式，需要用户交互的联网提示框
 typedef void(^CTSwiftAlertShowHandler)(int type, NSString *ssid);  // type 当前联网模式 1：STA，2：AP
 typedef void(^CTSwiftAlertActionCanceled)(void);        // 提示框 取消 回调
 typedef void(^CTSwiftAlertActionConfirmed)(NSString *password);  // 提示框 确认 回调

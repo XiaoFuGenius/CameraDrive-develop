@@ -43,6 +43,7 @@
 /* Begin PBXFileReference section */
 		6A39DFCA21ED77C200A30399 /* CTSimpleNetwork.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CTSimpleNetwork.h; sourceTree = "<group>"; };
 		6A39DFCB21ED77C200A30399 /* CTSimpleNetwork.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CTSimpleNetwork.m; sourceTree = "<group>"; };
+		6A7BEFE02224DF9300AC1597 /* Demo-OC.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Demo-OC.entitlements"; sourceTree = "<group>"; };
 		6A85778921DDC0810087FCF4 /* SwiftLinkerViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SwiftLinkerViewController.h; sourceTree = "<group>"; };
 		6A85778A21DDC0810087FCF4 /* SwiftLinkerViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SwiftLinkerViewController.m; sourceTree = "<group>"; };
 		6A85778C21DDC0970087FCF4 /* EasyCameraViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EasyCameraViewController.h; sourceTree = "<group>"; };
@@ -51,7 +52,6 @@
 		6AA400D321C8A3D00023BCEB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6AA400D821C8A3D00023BCEB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6AA400D921C8A3D00023BCEB /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		6AA400E021C8A54C0023BCEB /* Demo-OC.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Demo-OC.entitlements"; sourceTree = "<group>"; };
 		6AA400E121C8A58F0023BCEB /* NetworkExtension.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NetworkExtension.framework; path = System/Library/Frameworks/NetworkExtension.framework; sourceTree = SDKROOT; };
 		6AA400E321C8A6410023BCEB /* XFAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XFAppDelegate.h; sourceTree = "<group>"; };
 		6AA400E421C8A6410023BCEB /* XFAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XFAppDelegate.m; sourceTree = "<group>"; };
@@ -119,8 +119,8 @@
 		6AA400C921C8A3D00023BCEB /* Demo-OC */ = {
 			isa = PBXGroup;
 			children = (
+				6A7BEFE02224DF9300AC1597 /* Demo-OC.entitlements */,
 				6AA400FB21C8A9C30023BCEB /* README.md */,
-				6AA400E021C8A54C0023BCEB /* Demo-OC.entitlements */,
 				6AA400E321C8A6410023BCEB /* XFAppDelegate.h */,
 				6AA400E421C8A6410023BCEB /* XFAppDelegate.m */,
 				6AA400E721C8A6880023BCEB /* XFDemoViewController.h */,
@@ -232,6 +232,12 @@
 							};
 							com.apple.HotspotConfiguration = {
 								enabled = 1;
+							};
+							com.apple.Keychain = {
+								enabled = 0;
+							};
+							com.apple.WAC = {
+								enabled = 0;
 							};
 						};
 					};

@@ -101,6 +101,11 @@ class SwiftLinkerViewController: UIViewController {
             CTConfig.shared()?.debugLogHandler = { (log: String?) in
                 weakSelf?.xf_Log(logX: log! as NSString)
             }
+            CTConfig.shared()?.blueStripDetectionHandler = { (blueStripImage:UIImage?) in
+                weakSelf?.xf_Log(logX: "当前图片检测到蓝条，可选择记录日志或者图片数据。")
+            }  // 1.0.17 新增，蓝条检测
+            //CTConfig.shared()?.blueStripDetectionType = 1
+            CTConfig.shared()?.channelSetting = -1  // 1.0.17 新增，AP模式，随机信道
             CTConfig.shared()?.splitStrings = ["!@"]
 
             CTEasyLinker.sharedEsay().smartMode = 1
@@ -139,6 +144,8 @@ class SwiftLinkerViewController: UIViewController {
         case CTSwiftBleLinkStatus.deviceNotFound, CTSwiftBleLinkStatus.deviceFailed:
             self.xf_Log(logX: description! as NSString)
             self.resetUI()
+        case CTSwiftBleLinkStatus.deviceConnecting:
+            self.xf_Log(logX: description! as NSString)
         case CTSwiftBleLinkStatus.deviceSucceed:
             self.xf_Log(logX: "已连接设备蓝牙，开始尝试与设备建立网络连接.")
 

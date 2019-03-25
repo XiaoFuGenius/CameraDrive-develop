@@ -219,6 +219,20 @@ class CameraHelperViewController: UIViewController {
                     return
                 }
 
+                if ((CTConfig.shared()?.blueStripDetectionHandler) != nil) {
+                    var isBlue: Bool = CTConfig.examineBlueStrip(UIImage.init(data: rgbData))
+                    if isBlue {
+                        weakSelf?.showAlertViewMsg(msg: "照片拍摄失败，检测到蓝条，请重试.")
+                        return
+                    }
+
+                    isBlue = CTConfig.examineBlueStrip(UIImage.init(data: plData))
+                    if isBlue {
+                        weakSelf?.showAlertViewMsg(msg: "照片拍摄失败，检测到蓝条，请重试.")
+                        return
+                    }
+                }
+
                 weakSelf?.displayLayer = false
                 let imageView: UIImageView = weakSelf!.displayView.subviews.first as! UIImageView
                 imageView.image = UIImage.init(data: rgbData)
@@ -453,7 +467,12 @@ class CameraHelperViewController: UIViewController {
         weak var weakSelf = self
         DispatchQueue.main.async {
             if !isOK {
-                NSLog("摄像头发生错误，当前已关闭，可尝试重启或者退出当前控制器.")
+                if (CTCameraHelper.shared()?.isBlueStripConfirmed)! {
+                    weakSelf?.showAlertViewMsg(msg: "当前检测到蓝条，摄像头已关闭，可尝试重启或者退出当前控制器.")
+                } else {
+                    weakSelf?.showAlertViewMsg(msg: "摄像头发生错误，当前已关闭，可尝试重启或者退出当前控制器.")
+                }
+
                 weakSelf?.layerBtn.isSelected = false
                 weakSelf?.captureBtn.isSelected = false
                 return

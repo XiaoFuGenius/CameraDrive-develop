@@ -1,5 +1,5 @@
 PODS:
-  - CameraDrive-develop (1.0.12)
+  - CameraDrive-develop (1.0.18)
 
 DEPENDENCIES:
   - CameraDrive-develop
@@ -9,7 +9,7 @@ SPEC REPOS:
     - CameraDrive-develop
 
 SPEC CHECKSUMS:
-  CameraDrive-develop: 4923d65e33c9ace959285edc2254c8455ea11b8a
+  CameraDrive-develop: cc90bb2bdbd95a843f999115d96c0117af71b7ef
 
 PODFILE CHECKSUM: 205150facda66a55c7cf6e33ae0124545dd5f80a
 

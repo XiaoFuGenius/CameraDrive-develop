@@ -227,6 +227,19 @@ typedef void (^XFUserRightsCallBack)(BOOL authorized, XFUserAuthorizationStatus 
                     return;
                 }
 
+                if ([CTConfig SharedConfig].blueStripDetectionHandler) {
+                    NSArray *images = @[[UIImage imageWithData:rgbData],
+                                        [UIImage imageWithData:plData]];
+
+                    for (UIImage *image in images) {
+                        BOOL isBlue = [CTConfig ExamineBlueStripImage:image];
+                        if (isBlue) {
+                            [weakSelf showAlertViewMsg:@"照片拍摄失败，检测到蓝条，请重试"];
+                            return;
+                        }
+                    }
+                }
+
                 weakSelf.displayLayer = NO;
                 UIImageView *imageView = weakSelf.displayView.subviews.firstObject;
                 imageView.image = [UIImage imageWithData:rgbData];
@@ -323,7 +336,12 @@ typedef void (^XFUserRightsCallBack)(BOOL authorized, XFUserAuthorizationStatus 
     XFWeakSelf(weakSelf);
     dispatch_async(dispatch_get_main_queue(), ^{
         if (!isOK) {
-            NSLog(@"摄像头发生错误，当前已关闭，可尝试重启或者退出当前控制器.");
+            if (weakSelf.camera.isBlueStripConfirmed) {
+                [weakSelf showAlertViewMsg:@"当前检测到蓝条，摄像头已关闭，可尝试重启或者退出当前控制器."];
+            } else {
+                [weakSelf showAlertViewMsg:@"摄像头发生错误，当前已关闭，可尝试重启或者退出当前控制器."];
+            }
+
             weakSelf.layerBtn.selected = NO;
             weakSelf.captureBtn.selected = NO;
             return;

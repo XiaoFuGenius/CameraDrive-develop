@@ -139,6 +139,11 @@
     config.debugLogHandler = ^(NSString *log) {
         [weakSelf xf_Log:log];
     };
+    config.blueStripDetectionHandler = ^(UIImage *blueStripImage) {
+        [weakSelf xf_Log:@"当前图片检测到蓝条，可选择记录日志或者图片数据。"];
+    };  // 1.0.17 新增，蓝条检测
+    //[CTConfig SharedConfig].blueStripDetectionType = 1;
+    config.channelSetting = -1;  // 1.0.17 新增，AP模式，随机信道
     config.splitStrings = @[@"!@"];
 
     [notiCenter addObserver:self selector:@selector(CT_Device_ScanUpdate:)

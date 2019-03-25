@@ -14,7 +14,7 @@ PODS:
   - AFNetworking/Serialization (3.2.1)
   - AFNetworking/UIKit (3.2.1):
     - AFNetworking/NSURLSession
-  - CameraDrive-develop (1.0.12)
+  - CameraDrive-develop (1.0.18)
   - XiaoFuTech-develop (1.0.5):
     - XiaoFuTech-develop/AFNetworking (= 1.0.5)
   - XiaoFuTech-develop/AFNetworking (1.0.5):
@@ -33,7 +33,7 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   AFNetworking: b6f891fdfaed196b46c7a83cf209e09697b94057
-  CameraDrive-develop: 4923d65e33c9ace959285edc2254c8455ea11b8a
+  CameraDrive-develop: cc90bb2bdbd95a843f999115d96c0117af71b7ef
   XiaoFuTech-develop: 92fbffc5ee659318eef63d52a56841394b673a5f
 
 PODFILE CHECKSUM: 5352f3d7952c981e723ebb485cf09995bd114196
