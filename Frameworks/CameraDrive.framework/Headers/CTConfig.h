@@ -49,87 +49,65 @@ typedef void(^CTConfigBlueStripDetectionHandler)(UIImage *blueStripImage);
 
 @interface CTConfig : NSObject
 
-#pragma mark >>> 常规配置项 <<<
-/**
- debug开关
- 开启以后，终端会输出debug日志，默认 关闭；
- */
+#pragma mark
+#pragma mark 常规配置项
+
+/// 终端日志输出开关，默认 关闭；
 @property (nonatomic, assign) BOOL debugEnable;
 
-/**
- debug日志类型开关
- 注：0：默认(类名)，1(具体方法)，2(附加当前线程)
- */
+/// 终端日志输出类型，注：0：默认(类名)，1(具体方法)，2(附加当前线程)
 @property (nonatomic, assign) NSInteger debugLogType;
 
-/**
- debug log handler
- 赋值后，内部方法会在适当时机调用，并返回关键日志；
- */
+/// 终端日志输出回调
 @property (nonatomic, copy) CTConfigDebugLogHandler debugLogHandler;
 
-/**
- 蓝条检测 开关
- 开启以后，摄像头启动时，对 前十帧图像 执行 蓝条检测 算法，默认关闭；
- 对该Block赋值即意味着开启蓝条检测，同时，对于检测到的蓝条图片，会通过Block回传
- */
-@property (nonatomic, copy) CTConfigBlueStripDetectionHandler blueStripDetectionHandler;
-
-/**
- 蓝条检测，类型选择，默认 0
- 0：仅检测摄像头成功启动后的前十帧图像；1：对每一帧图像都进行检测（可能会影响渲染的流畅度）；
- */
+/// 蓝条检测，可选类型，默认 0
+/// 0：仅检测摄像头成功启动后的前十帧图像；1：对每一帧图像都进行检测（可能会影响渲染的流畅度）；
 @property (nonatomic, assign) NSInteger blueStripDetectionType;
 
-/**
- 热点模式，信道指定（STA模式，信道由产生WiFi信号的路由器本身决定）
- -1 随机信道，1 - 13 指定信道(不建议选择 12，13 信道)，默认随机信道；
- 另：当前 Android 默认 信道9
- */
+/// 蓝条检测确认回调，默认关闭。赋值即意味着开启检测，对于确认存在蓝条的图片帧，会通过回调传出；
+@property (nonatomic, copy) CTConfigBlueStripDetectionHandler blueStripDetectionHandler;
+
+/// 热点模式，指定信道。（STA模式，信道由产生 wifi 信号的路由器决定）
+/// -1 随机信道，1 - 13 指定信道(不建议选择 12，13 信道)，默认随机信道；
+/// 注：当前 Android 默认 信道9
 @property (nonatomic, assign) NSInteger channelSetting;
 
-/**
- 指定的 分隔字符串数组
- 拆分 设备 的蓝牙识别字符串，拆分成 Name 和 BindID；默认 @[@"!@"]；
- */
+/// 指定的 分隔字符串数组
+/// 拆分 设备 的蓝牙识别字符串，拆分成 Name 和 BindID；默认 @[@"!@"]；
 @property (nonatomic, strong) NSArray *splitStrings;
 
-/**
- 蓝牙扫描时，外围设备的保活时间，默认 2s，自定义时间 >2s
- 超过保活时间即被视为该外围设备已失活，将从已扫描到的设备列表中移除；
- 注1：-1 指定，不执行 相关的保活逻辑，设备扫描到一次，将会始终存在于设备列表中；
- 注2：当前状态 默认开启，默认 2s；
- */
+/// 蓝牙扫描时，外围设备的保活时间，默认 2s，自定义时间 >2s
+/// 超过保活时间即被视为该外围设备已失活，将从已扫描到的设备列表中移除；
+/// 注1：-1 指定，不执行 相关的保活逻辑，设备扫描到一次，将会始终存在于设备列表中；
+/// 注2：当前状态 默认开启，默认 2s；
 @property (nonatomic, assign) NSTimeInterval peripheralAliveTime;
 
-/**
- StartOV788:1 延迟 500 ms 测试，默认关闭
- */
+/// StartOV788:1 延迟 500 ms 测试，默认关闭
 @property (nonatomic, assign) BOOL delayStartOv788Test;
 
-/**
- StartOV788:1 延迟 500 ms 测试时间，默认 500 ms
- */
+/// StartOV788:1 延迟 500 ms 测试时间，默认 500 ms
 @property (nonatomic, assign) double delayStartOv788Time;
 
-/**
- 获取 手机当前连接 WiFi 的 ssid
- @return ssid
- */
-+ (NSString *)GetSSID;
+#pragma mark
+#pragma mark Public Methods
 
-/**
- 校验 图片中是否 有 蓝条
- @param image 图片数据
- @return 校验结果
- */
-+ (BOOL)ExamineBlueStripImage:(UIImage *)image;
+/// 请求 手机当前连接 wifi 的 ssid
+/// @param locRequest 请求位置权限
+/// @param callback 请求完成回调
+/// callback（iPhone_ssid）手机当前连接 wifi 的 ssid，可能为空
+/// callback（locRes）位置授权结果，可能为空，或 {@"authorized":@(授权状态)，@"status":@(CTUserAuthorizationStatus)}
+/// 注：locRequest 源于 iOS 13 新的隐私政策要求；低版本系统不受该参数影响。
+- (void)wifiSSID:(BOOL)locRequest Callback:(void (^)(NSString *iPhone_ssid, NSDictionary *locRes))callback;
 
-#pragma mark >>> LIFE CYCLE <<<
-/**
- 取得 CTConfig 的共享实例
- @return CTConfig 的共享实例
- */
-+ (CTConfig *)SharedConfig;
+/// 校验 图片中是否存在<蓝条>情况
+/// @param image 待校验图片数据
+- (BOOL)examineBlueStripImage:(UIImage *)image;
+
+#pragma mark
+#pragma mark LIFE CYCLE
+
+/// CTConfig 的共享实例
++ (CTConfig *)Shared;
 
 @end

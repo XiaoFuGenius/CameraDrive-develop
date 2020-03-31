@@ -25,6 +25,7 @@ extern NSNotificationName const _Nullable CT_Camera_RestartByBSD;
 #pragma mark >>> 常规配置项 <<<
 @property (nonatomic, assign) int       renderingBitrate;  // “视频流渲染”码率 600~1200，码率会影响图像清晰度和流畅度；默认 600；
 @property (nonatomic, assign) int       ledMode;  // 切换"灯光模式"；0-标准光(表皮层)，1-偏振光(基底层)；默认 0；
+@property (nonatomic, assign) int       captureMode;  // 拍摄模式：0-优先拍摄表皮层，1-优先拍摄基底层（核心版本 >= 3.1.2）；默认 0；
 @property (nonatomic, strong) NSString  * _Nullable ip;  // “视频流”数据传输的“网络地址”；
 @property (nonatomic, assign) int       port;  // “视频流”数据传输的”端口号“，默认 1000；
 // 以下属性，“loadBearerView” 成功调用后，变更无效

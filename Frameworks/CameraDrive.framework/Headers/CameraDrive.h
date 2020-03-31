@@ -8,9 +8,9 @@
 
 /**
  CameraDrive版本号
- 更新时间：2019.05.09 18:50
+ 更新时间：2020.03.31 10:42
  */
-#define CameraDrive_SDK_VERSION @"1.0.19"
+#define CameraDrive_SDK_VERSION @"1.0.21"
 
 #import <UIKit/UIKit.h>
 
@@ -19,6 +19,7 @@
 #import "CTWiFiHelper.h"
 #import "CTPingHelper.h"
 #import "CTHotspotHelper.h"
+#import "CTUserRightsHelper.h"
 
 // 蓝牙&联网 连接控制
 #import "CTBleHelper.h"     // 基础
