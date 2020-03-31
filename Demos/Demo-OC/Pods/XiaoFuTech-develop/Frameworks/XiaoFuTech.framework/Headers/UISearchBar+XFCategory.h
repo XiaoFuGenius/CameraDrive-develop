@@ -2,8 +2,8 @@
 //  UISearchBar+XFCategory.h
 //  XiaoFuTech
 //
-//  Created by xiaofutech on 2018/7/4.
-//  Copyright © 2018年 XiaoFu. All rights reserved.
+//  Created by 胡钧昱 on 2018/7/4.
+//  Copyright © 2018年 EternalTech. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>

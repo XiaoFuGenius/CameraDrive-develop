@@ -2,8 +2,8 @@
 //  UIDevice+XFCategory.h
 //  XiaoFuTechBasic
 //
-//  Created by xiaofutech on 2017/9/25.
-//  Copyright © 2017年 XiaoFu. All rights reserved.
+//  Created by 胡钧昱 on 2017/9/25.
+//  Copyright © 2017年 EternalTech. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
@@ -15,7 +15,7 @@ typedef NS_ENUM(NSInteger, XFDeviceType) {
     XFDeviceType_iPad,
     XFDeviceType_iPodTouch,
     XFDeviceType_AppleTV,
-    XFDeviceType_iPhoneX,
+    XFDeviceType_iPhoneX,  // 包含：iPhone X，iPhone XR，iPhone XS，iPhone XS Max
 };
 
 @interface UIDevice (XFCategory)

@@ -2,12 +2,13 @@
 //  XFHelper.h
 //  XiaoFuTechBasic
 //
-//  Created by xiaofutech on 2017/9/28.
-//  Copyright © 2017年 XiaoFu. All rights reserved.
+//  Created by 胡钧昱 on 2017/9/28.
+//  Copyright © 2017年 EternalTech. All rights reserved.
 //
 
 #ifndef XFHelper_h
 #define XFHelper_h
+
 
 ///XFControllerHelper
 #import "XFControllerHelper.h"
@@ -22,6 +23,7 @@
 #import "XFPopupWindow.h"
 
 ///XFViewHelper
+#import "XFFontFamilyView.h"
 #import "XFDesignProgressView.h"
 #import "XFDesignSpinnerView.h"
 #import "XFScrollView.h"
@@ -33,6 +35,8 @@
 #import "XFCarouselControls.h"
 
 ///XFCustomHelper
+#import "XFClockTool.h"
+#import "XFCalendarTool.h"
 #import "XFVideoPlayer.h"
 #import "XFSettingsBundleHelper.h"
 #import "XFAppIconHelper.h"
@@ -44,5 +48,7 @@
 #import "XFDataBaseHelper.h"
 #import "XFAppDelegateHelper.h"
 #import "XFLanguageHelper.h"
+
+
 
 #endif /* XFHelper_h */

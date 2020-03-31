@@ -1,1 +1,0 @@
-../../../../XiaoFuTech-develop/Frameworks/XiaoFuTech.framework/Headers/UIDevice+XFCategory.h

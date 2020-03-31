@@ -227,12 +227,12 @@ typedef void (^XFUserRightsCallBack)(BOOL authorized, XFUserAuthorizationStatus 
                     return;
                 }
 
-                if ([CTConfig SharedConfig].blueStripDetectionHandler) {
+                if ([CTConfig Shared].blueStripDetectionHandler) {
                     NSArray *images = @[[UIImage imageWithData:rgbData],
                                         [UIImage imageWithData:plData]];
 
                     for (UIImage *image in images) {
-                        BOOL isBlue = [CTConfig ExamineBlueStripImage:image];
+                        BOOL isBlue = [[CTConfig Shared] examineBlueStripImage:image];
                         if (isBlue) {
                             [weakSelf showAlertViewMsg:@"照片拍摄失败，检测到蓝条，请重试"];
                             return;
@@ -282,6 +282,7 @@ typedef void (^XFUserRightsCallBack)(BOOL authorized, XFUserAuthorizationStatus 
 {
     self.camera.renderingBitrate = 800;
     self.camera.ledMode = 0;
+    self.camera.captureMode = 1;
     self.camera.isRetroflexion = NO;
     self.camera.ip = self.param[@"IP"];
     self.camera.port = 1000;

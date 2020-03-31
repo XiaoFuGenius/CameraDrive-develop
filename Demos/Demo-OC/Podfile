@@ -13,7 +13,7 @@
 
 #    开发阶段，支持模拟器调试UI
     pod 'CameraDrive-develop'
-    pod 'XiaoFuTech-develop'
+    pod 'XiaoFuTech-develop', :subspecs => ['Bugly', 'AFNetworking']
 
 
 #    发布阶段，不支持模拟器调试UI

@@ -2,8 +2,8 @@
 //  XFVideoPlayer.h
 //  XiaoFuTech
 //
-//  Created by 胡文峰 on 2018/11/21.
-//  Copyright © 2018 XiaoFu. All rights reserved.
+//  Created by 胡钧昱 on 2018/11/21.
+//  Copyright © 2018 EternalTech. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>

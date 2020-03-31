@@ -2,8 +2,8 @@
 //  XFPopupWindow.h
 //  XiaoFuTechHelper
 //
-//  Created by xiaofutech on 2017/9/27.
-//  Copyright © 2017年 XiaoFu. All rights reserved.
+//  Created by 胡钧昱 on 2017/9/27.
+//  Copyright © 2017年 EternalTech. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>

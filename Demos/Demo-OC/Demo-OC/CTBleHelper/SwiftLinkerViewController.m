@@ -123,16 +123,19 @@
     XFWeakSelf(weakSelf);
 
     self.swiftLinker.configHandler = ^{
-        CTConfig *config = [CTConfig SharedConfig];
+        CTConfig *config = [CTConfig Shared];
+        
         config.debugEnable = YES;
         config.debugLogType = 1;
         config.debugLogHandler = ^(NSString *log) {
             [weakSelf xf_Log:log];
         };
-        config.blueStripDetectionHandler = ^(UIImage *blueStripImage) {
-            [weakSelf xf_Log:@"当前图片检测到蓝条，可选择记录日志或者图片数据。"];
-        };  // 1.0.17 新增，蓝条检测
-        //[CTConfig SharedConfig].blueStripDetectionType = 1;
+        
+//        config.blueStripDetectionHandler = ^(UIImage *blueStripImage) {
+//            [weakSelf xf_Log:@"当前图片检测到蓝条，可选择记录日志或者图片数据。"];
+//        };  // 1.0.17 新增，蓝条检测
+        //[CTConfig Shared].blueStripDetectionType = 1;
+        
         config.channelSetting = -1;  // 1.0.17 新增，AP模式，随机信道
         config.splitStrings = @[@"!@"];
 
@@ -475,61 +478,63 @@
                                                         NSString * _Nonnull ssid,
                                                         NSString * _Nonnull password,
                                                         NSString * _Nonnull ip) {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            weakSelf.maskView.hidden = YES;
+        [[CTConfig Shared] wifiSSID:YES Callback:^(NSString *iPhone_ssid, NSDictionary *locRes) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                weakSelf.maskView.hidden = YES;
 
-            NSString *logMsg = @"wifiStatus 获取成功.";
-            if (code==CTBleResponseError) {
-                logMsg = @"未成功获取 wifiStatus.";
+                NSString *logMsg = @"wifiStatus 获取成功.";
+                if (code==CTBleResponseError) {
+                    logMsg = @"未成功获取 wifiStatus.";
+                    [weakSelf xf_Log:logMsg];
+                    return;
+                }
+
                 [weakSelf xf_Log:logMsg];
-                return;
-            }
+                if (type==0) {
 
-            [weakSelf xf_Log:logMsg];
-            if (type==0) {
-
-                if (![[CTConfig GetSSID] xf_NotNull]) {
-                    logMsg = @"UnKnown_手机未连接wifi，可启动ap模式.";
-                } else {
-                    logMsg = @"UnKnown_手机已连接wifi，可启动sta模式.";
-                }
-
-            } else if (type==1) {
-
-                if (![[CTConfig GetSSID] xf_NotNull]) {
-                    logMsg = @"STA_手机未连接wifi，可启动ap模式.";
-                } else {
-                    if ([[CTConfig GetSSID] isEqualToString:ssid]) {
-                        if ([ip xf_NotNull]) {
-                            logMsg = @"STA_手机与设备处于同一wifi网络，且已获取到设备联网ip，可直接启动摄像头.";
-                        } else {
-                            logMsg = @"AP_手机已连接设备热点，但未获取到设备联网ip，可启动sta模式.";
-                        }
+                    if (![iPhone_ssid xf_NotNull]) {
+                        logMsg = @"UnKnown_手机未连接wifi，可启动ap模式.";
                     } else {
-                        logMsg = @"STA_手机已连接wifi，可启动sta模式.";
+                        logMsg = @"UnKnown_手机已连接wifi，可启动sta模式.";
                     }
-                }
 
-            } else if (type==2) {
+                } else if (type==1) {
 
-                if (![[CTConfig GetSSID] xf_NotNull]) {
-                    logMsg = @"AP_手机未连接wifi，可启动ap模式.";
-                } else {
-                    if ([[CTConfig GetSSID] isEqualToString:ssid]) {
-                        if ([ip xf_NotNull]) {
-                            logMsg = @"AP_手机已连接设备热点，且已获取到设备联网ip，可直接启动摄像头.";
-                        } else {
-                            logMsg = @"AP_手机已连接设备热点，但未获取到设备联网ip，可启动ap模式.";
-                        }
+                    if (![iPhone_ssid xf_NotNull]) {
+                        logMsg = @"STA_手机未连接wifi，可启动ap模式.";
                     } else {
-                        logMsg = @"AP_手机未连接当前设备热点，可启动ap模式.";
+                        if ([iPhone_ssid isEqualToString:ssid]) {
+                            if ([ip xf_NotNull]) {
+                                logMsg = @"STA_手机与设备处于同一wifi网络，且已获取到设备联网ip，可直接启动摄像头.";
+                            } else {
+                                logMsg = @"AP_手机已连接设备热点，但未获取到设备联网ip，可启动sta模式.";
+                            }
+                        } else {
+                            logMsg = @"STA_手机已连接wifi，可启动sta模式.";
+                        }
                     }
+
+                } else if (type==2) {
+
+                    if (![iPhone_ssid xf_NotNull]) {
+                        logMsg = @"AP_手机未连接wifi，可启动ap模式.";
+                    } else {
+                        if ([iPhone_ssid isEqualToString:ssid]) {
+                            if ([ip xf_NotNull]) {
+                                logMsg = @"AP_手机已连接设备热点，且已获取到设备联网ip，可直接启动摄像头.";
+                            } else {
+                                logMsg = @"AP_手机已连接设备热点，但未获取到设备联网ip，可启动ap模式.";
+                            }
+                        } else {
+                            logMsg = @"AP_手机未连接当前设备热点，可启动ap模式.";
+                        }
+                    }
+
                 }
 
-            }
-
-            [weakSelf xf_Log:logMsg];
-        });
+                [weakSelf xf_Log:logMsg];
+            });
+        }];
     }];
 }
 
@@ -602,6 +607,7 @@
     };
 
     self.shouldReset = NO;
+    cameraCtr.modalPresentationStyle = UIModalPresentationFullScreen;
     [self.navigationController presentViewController:cameraCtr animated:YES completion:nil];
 }
 

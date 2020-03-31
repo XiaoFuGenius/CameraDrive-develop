@@ -14,6 +14,7 @@
 
 #import <CameraDrive/CameraDrive.h>
 #import <XiaoFuTech/XiaoFuTech.h>
+#import "XFBuglySdkHelper.h"
 
 #import "XFAppDelegate.h"
 #import "XFConfig.h"

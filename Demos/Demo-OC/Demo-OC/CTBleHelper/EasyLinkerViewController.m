@@ -133,16 +133,19 @@
     XFWeakSelf(weakSelf);
     NSNotificationCenter *notiCenter = [NSNotificationCenter defaultCenter];
 
-    CTConfig *config = [CTConfig SharedConfig];
+    CTConfig *config = [CTConfig Shared];
+    
     config.debugEnable = YES;
     config.debugLogType = 1;
     config.debugLogHandler = ^(NSString *log) {
         [weakSelf xf_Log:log];
     };
-    config.blueStripDetectionHandler = ^(UIImage *blueStripImage) {
-        [weakSelf xf_Log:@"当前图片检测到蓝条，可选择记录日志或者图片数据。"];
-    };  // 1.0.17 新增，蓝条检测
-    //[CTConfig SharedConfig].blueStripDetectionType = 1;
+    
+//    config.blueStripDetectionHandler = ^(UIImage *blueStripImage) {
+//        [weakSelf xf_Log:@"当前图片检测到蓝条，可选择记录日志或者图片数据。"];
+//    };  // 1.0.17 新增，蓝条检测
+    //[CTConfig Shared].blueStripDetectionType = 1;
+    
     config.channelSetting = -1;  // 1.0.17 新增，AP模式，随机信道
     config.splitStrings = @[@"!@"];
 
@@ -428,39 +431,42 @@
 #pragma mark > STA Mode <
 - (void)confirmShowSTALinkAlert
 {
-    NSString *ssid = [CTConfig GetSSID];
-    if (![ssid xf_NotNull]) {
-        [self xf_Log:@"showSTALinkAlert，启动失败，未获取到ssid."];
-        return;
-    }
-
-    self.maskView.hidden = NO;
-
-    NSString *pwd = [CTEasyLinker STACachesContains:ssid];
-    if (pwd) {
-        [self xf_Log:@"该wifi已保存密码，无需再次输入密码."];
-        [self confirmSTAlink_SSID:ssid Pwd:pwd];
-        return;
-    }
-
     XFWeakSelf(weakSelf);
-    UIAlertController *staAlert = [UIAlertController
-                                   alertControllerWithTitle:@"输入wifi密码" message:ssid
-                                   preferredStyle:UIAlertControllerStyleAlert];
-    [staAlert addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
-        //可自定义textField相关属性...
+    [[CTConfig Shared] wifiSSID:YES Callback:^(NSString *iPhone_ssid, NSDictionary *locRes) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if (![iPhone_ssid xf_NotNull]) {
+                [weakSelf xf_Log:@"showSTALinkAlert，启动失败，未获取到ssid."];
+                return;
+            }
+
+            weakSelf.maskView.hidden = NO;
+
+            NSString *pwd = [CTEasyLinker STACachesContains:iPhone_ssid];
+            if (pwd) {
+                [weakSelf xf_Log:@"该wifi已保存密码，无需再次输入密码."];
+                [weakSelf confirmSTAlink_SSID:iPhone_ssid Pwd:pwd];
+                return;
+            }
+
+            UIAlertController *staAlert = [UIAlertController
+                                           alertControllerWithTitle:@"输入wifi密码" message:iPhone_ssid
+                                           preferredStyle:UIAlertControllerStyleAlert];
+            [staAlert addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
+                //可自定义textField相关属性...
+            }];
+            [staAlert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel
+                                                       handler:^(UIAlertAction * _Nonnull action) {
+                weakSelf.maskView.hidden = YES;
+                [weakSelf xf_Log:@"已取消sta连接."];
+            }]];
+            [staAlert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault
+                                                       handler:^(UIAlertAction * _Nonnull action) {
+                NSString *pwd = staAlert.textFields.firstObject.text;
+                [weakSelf confirmSTAlink_SSID:iPhone_ssid Pwd:pwd];
+            }]];
+            [weakSelf showAlert:staAlert Sender:weakSelf.autoLink];
+        });
     }];
-    [staAlert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel
-                                               handler:^(UIAlertAction * _Nonnull action) {
-        weakSelf.maskView.hidden = YES;
-        [weakSelf xf_Log:@"已取消sta连接."];
-    }]];
-    [staAlert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault
-                                               handler:^(UIAlertAction * _Nonnull action) {
-        NSString *pwd = staAlert.textFields.firstObject.text;
-        [weakSelf confirmSTAlink_SSID:ssid Pwd:pwd];
-    }]];
-    [self showAlert:staAlert Sender:self.autoLink];
 }
 
 - (void)confirmSTAlink_SSID:(NSString *)ssid Pwd:(NSString *)pwd
@@ -503,23 +509,25 @@
 - (void)applicationWillEnterForeground
 {
     XFWeakSelf(weakSelf);
-    dispatch_async(dispatch_get_main_queue(), ^{
-        if ([[CTConfig GetSSID] isEqualToString:weakSelf.apLinkSSID]) {
-            weakSelf.apLinkCheck = NO;
-            NSNotificationCenter *notiCenter = [NSNotificationCenter defaultCenter];
-            [notiCenter removeObserver:weakSelf name:UIApplicationWillEnterForegroundNotification
-                                object:nil];
+    [[CTConfig Shared] wifiSSID:YES Callback:^(NSString *iPhone_ssid, NSDictionary *locRes) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if ([iPhone_ssid isEqualToString:weakSelf.apLinkSSID]) {
+                weakSelf.apLinkCheck = NO;
+                NSNotificationCenter *notiCenter = [NSNotificationCenter defaultCenter];
+                [notiCenter removeObserver:weakSelf name:UIApplicationWillEnterForegroundNotification
+                                    object:nil];
 
-            [CTHotspotHelper IPAddressConfirmed:^(BOOL success) {
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [weakSelf startNetworkConnect];
-                });
-            }];
+                [CTHotspotHelper IPAddressConfirmed:^(BOOL success) {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [weakSelf startNetworkConnect];
+                    });
+                }];
 
-        } else {
-            [weakSelf showAPLinkAlert:weakSelf.apLinkSSID];
-        }
-    });
+            } else {
+                [weakSelf showAPLinkAlert:weakSelf.apLinkSSID];
+            }
+        });
+    }];
 }
 
 #pragma mark -
@@ -656,61 +664,63 @@
                                                         NSString * _Nonnull ssid,
                                                         NSString * _Nonnull password,
                                                         NSString * _Nonnull ip) {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            weakSelf.maskView.hidden = YES;
+        [[CTConfig Shared] wifiSSID:YES Callback:^(NSString *iPhone_ssid, NSDictionary *locRes) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                weakSelf.maskView.hidden = YES;
 
-            NSString *logMsg = @"wifiStatus 获取成功.";
-            if (code==CTBleResponseError) {
-                logMsg = @"未成功获取 wifiStatus.";
+                NSString *logMsg = @"wifiStatus 获取成功.";
+                if (code==CTBleResponseError) {
+                    logMsg = @"未成功获取 wifiStatus.";
+                    [weakSelf xf_Log:logMsg];
+                    return;
+                }
+
                 [weakSelf xf_Log:logMsg];
-                return;
-            }
+                if (type==0) {
 
-            [weakSelf xf_Log:logMsg];
-            if (type==0) {
-
-                if (![[CTConfig GetSSID] xf_NotNull]) {
-                    logMsg = @"UnKnown_手机未连接wifi，可启动ap模式.";
-                } else {
-                    logMsg = @"UnKnown_手机已连接wifi，可启动sta模式.";
-                }
-
-            } else if (type==1) {
-
-                if (![[CTConfig GetSSID] xf_NotNull]) {
-                    logMsg = @"STA_手机未连接wifi，可启动ap模式.";
-                } else {
-                    if ([[CTConfig GetSSID] isEqualToString:ssid]) {
-                        if ([ip xf_NotNull]) {
-                            logMsg = @"STA_手机与设备处于同一wifi网络，且已获取到设备联网ip，可直接启动摄像头.";
-                        } else {
-                            logMsg = @"AP_手机已连接设备热点，但未获取到设备联网ip，可启动sta模式.";
-                        }
+                    if (![iPhone_ssid xf_NotNull]) {
+                        logMsg = @"UnKnown_手机未连接wifi，可启动ap模式.";
                     } else {
-                        logMsg = @"STA_手机已连接wifi，可启动sta模式.";
+                        logMsg = @"UnKnown_手机已连接wifi，可启动sta模式.";
                     }
-                }
 
-            } else if (type==2) {
+                } else if (type==1) {
 
-                if (![[CTConfig GetSSID] xf_NotNull]) {
-                    logMsg = @"AP_手机未连接wifi，可启动ap模式.";
-                } else {
-                    if ([[CTConfig GetSSID] isEqualToString:ssid]) {
-                        if ([ip xf_NotNull]) {
-                            logMsg = @"AP_手机已连接设备热点，且已获取到设备联网ip，可直接启动摄像头.";
-                        } else {
-                            logMsg = @"AP_手机已连接设备热点，但未获取到设备联网ip，可启动ap模式.";
-                        }
+                    if (![iPhone_ssid xf_NotNull]) {
+                        logMsg = @"STA_手机未连接wifi，可启动ap模式.";
                     } else {
-                        logMsg = @"AP_手机未连接当前设备热点，可启动ap模式.";
+                        if ([iPhone_ssid isEqualToString:ssid]) {
+                            if ([ip xf_NotNull]) {
+                                logMsg = @"STA_手机与设备处于同一wifi网络，且已获取到设备联网ip，可直接启动摄像头.";
+                            } else {
+                                logMsg = @"AP_手机已连接设备热点，但未获取到设备联网ip，可启动sta模式.";
+                            }
+                        } else {
+                            logMsg = @"STA_手机已连接wifi，可启动sta模式.";
+                        }
                     }
+
+                } else if (type==2) {
+
+                    if (![iPhone_ssid xf_NotNull]) {
+                        logMsg = @"AP_手机未连接wifi，可启动ap模式.";
+                    } else {
+                        if ([iPhone_ssid isEqualToString:ssid]) {
+                            if ([ip xf_NotNull]) {
+                                logMsg = @"AP_手机已连接设备热点，且已获取到设备联网ip，可直接启动摄像头.";
+                            } else {
+                                logMsg = @"AP_手机已连接设备热点，但未获取到设备联网ip，可启动ap模式.";
+                            }
+                        } else {
+                            logMsg = @"AP_手机未连接当前设备热点，可启动ap模式.";
+                        }
+                    }
+
                 }
 
-            }
-
-            [weakSelf xf_Log:logMsg];
-        });
+                [weakSelf xf_Log:logMsg];
+            });
+        }];
     }];
 }
 
@@ -773,29 +783,32 @@
 
 - (void)autoLink:(UIButton *)sender
 {
-    if (![[CTConfig GetSSID] xf_NotNull]) {
-        [self startNetworkConnect];
-        return;
-    }
-
     XFWeakSelf(weakSelf);
+    [[CTConfig Shared] wifiSSID:YES Callback:^(NSString *iPhone_ssid, NSDictionary *locRes) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if (![iPhone_ssid xf_NotNull]) {
+                [weakSelf startNetworkConnect];
+                return;
+            }
 
-    UIAlertController *alert = [UIAlertController
-                                alertControllerWithTitle:@"请选择网络连接类型" message:nil
-                                preferredStyle:UIAlertControllerStyleAlert];
-    [alert addAction:[UIAlertAction actionWithTitle:@"STA" style:UIAlertActionStyleDefault
-                                            handler:^(UIAlertAction * _Nonnull action) {
-        [CTEasyLinker SharedEsayLinker].smartMode = 1;
-        [weakSelf startNetworkConnect];
-    }]];
-    [alert addAction:[UIAlertAction actionWithTitle:@"AP" style:UIAlertActionStyleDefault
-                                            handler:^(UIAlertAction * _Nonnull action) {
-        [CTEasyLinker SharedEsayLinker].smartMode = 2;
-        [weakSelf startNetworkConnect];
-    }]];
-    [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel
-                                            handler:nil]];
-    [self showAlert:alert Sender:self.autoLink];
+            UIAlertController *alert = [UIAlertController
+                                        alertControllerWithTitle:@"请选择网络连接类型" message:nil
+                                        preferredStyle:UIAlertControllerStyleAlert];
+            [alert addAction:[UIAlertAction actionWithTitle:@"STA" style:UIAlertActionStyleDefault
+                                                    handler:^(UIAlertAction * _Nonnull action) {
+                [CTEasyLinker SharedEsayLinker].smartMode = 1;
+                [weakSelf startNetworkConnect];
+            }]];
+            [alert addAction:[UIAlertAction actionWithTitle:@"AP" style:UIAlertActionStyleDefault
+                                                    handler:^(UIAlertAction * _Nonnull action) {
+                [CTEasyLinker SharedEsayLinker].smartMode = 2;
+                [weakSelf startNetworkConnect];
+            }]];
+            [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel
+                                                    handler:nil]];
+            [weakSelf showAlert:alert Sender:weakSelf.autoLink];
+        });
+    }];
 }
 
 - (void)startNetworkConnect
@@ -818,6 +831,7 @@
     };
 
     self.shouldReset = NO;
+    cameraCtr.modalPresentationStyle = UIModalPresentationFullScreen;
     [self.navigationController presentViewController:cameraCtr animated:YES completion:nil];
 }
 

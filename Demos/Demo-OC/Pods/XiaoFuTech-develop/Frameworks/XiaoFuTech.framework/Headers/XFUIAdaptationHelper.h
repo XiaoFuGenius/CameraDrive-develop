@@ -2,8 +2,8 @@
 //  XFUIAdaptationHelper.h
 //  XiaoFuTech
 //
-//  Created by xiaofutech on 2018/1/19.
-//  Copyright © 2018年 XiaoFu. All rights reserved.
+//  Created by 胡钧昱 on 2018/1/19.
+//  Copyright © 2018年 EternalTech. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -22,12 +22,22 @@
 
 + (CGFloat)Height;
 
-+ (CGFloat)Scale;
-
 + (CGFloat)SafeTop;
 
 + (CGFloat)SafeBottom;
 
++ (CGFloat)NavigationBarHeight;
+
+/**
+ iPhone缩放比例，基准为：375 * 667
+ @return 缩放比
+ */
++ (CGFloat)Scale;
+
+/**
+ iPad缩放比例，基准为：768 * 1024
+ @return 缩放比
+ */
 + (CGFloat)Scale4iPad;
 
 @end

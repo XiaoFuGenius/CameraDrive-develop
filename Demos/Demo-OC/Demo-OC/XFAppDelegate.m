@@ -27,6 +27,10 @@
         NSData* data = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:nil];
         data = nil;
     });
+    
+    [XFBuglySdkHelper RegisterAppKey:@"cf4300b1d2"
+                              secret:@"b5ac4324-7160-470e-a4b4-b6010f48f29f"
+                         debugEnable:YES];
 
     [XFLoadingWindow InitLoadingWindow:UIWindowLevelAlert];
 

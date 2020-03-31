@@ -1,1 +1,0 @@
-../../../../CameraDrive-develop/Frameworks/CameraDrive.framework/Headers/CTPingHelper.h

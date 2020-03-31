@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0930"
+   LastUpgradeVersion = "1020"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,10 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "F4E1DF8F472513AFC76963024125E65C"
+               BlueprintIdentifier = "EEA7187B6923357594D4D846376663B5"
+               BuildableName = "libXiaoFuTech-develop.a"
                BlueprintName = "XiaoFuTech-develop"
-               ReferencedContainer = "container:Pods.xcodeproj"
-               BuildableName = "libXiaoFuTech-develop.a">
+               ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

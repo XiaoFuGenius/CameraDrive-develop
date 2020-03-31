@@ -2,8 +2,8 @@
 //  UIView+XFCategory.h
 //  XiaoFuTechBasic
 //
-//  Created by xiaofutech on 2017/9/25.
-//  Copyright © 2017年 XiaoFu. All rights reserved.
+//  Created by 胡钧昱 on 2017/9/25.
+//  Copyright © 2017年 EternalTech. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
@@ -95,9 +95,14 @@
                                           StartPoint:(CGPoint)startPoint
                                             EndPoint:(CGPoint)endPoint Frame:(CGRect)frame;
 
-///边框虚线化
+///边框虚线化 - 需要先设置视图frame
 - (CAShapeLayer *)xf_AddDashLineBorderWidth:(CGFloat)borderWidth BorderColor:(UIColor *)borderColor
-                                DashPattren:(CGFloat)dashPattern IsRound:(BOOL)isRound;
+                                  DashWidth:(CGFloat)dashWidth DashSpacing:(CGFloat)dashSpacing
+                                    IsRound:(BOOL)isRound;
+
+///添加虚线 - 需要先设置视图frame
+- (CAShapeLayer *)xf_AddDashLineColor:(UIColor *)color DashWidth:(CGFloat)dashWidth
+                          DashSpacing:(CGFloat)dashSpacing;
 
 ///获取某个像素点的颜色值
 - (UIColor *)xf_ColorAtPixelPoint:(CGPoint)point Alpha:(CGFloat)alpha;

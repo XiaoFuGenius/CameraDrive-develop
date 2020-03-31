@@ -2,8 +2,8 @@
 //  XFImageHelper.h
 //  XiaoFuTech
 //
-//  Created by xiaofutech on 2017/11/19.
-//  Copyright © 2017年 XiaoFu. All rights reserved.
+//  Created by 胡钧昱 on 2017/11/19.
+//  Copyright © 2017年 EternalTech. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>

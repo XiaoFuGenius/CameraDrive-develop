@@ -2,7 +2,7 @@
 //  XFSettingsBundleHelper.h
 //  JunPingAssistant
 //
-//  Created by 胡文峰 on 2018/11/13.
+//  Created by 胡钧昱 on 2018/11/13.
 //  Copyright © 2018 xiaofutech. All rights reserved.
 //
 
